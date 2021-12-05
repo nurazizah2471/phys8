@@ -80,16 +80,13 @@ public class LoginFragment extends Fragment {
     private TextView txt_register_LoginFragment;
     private LoginViewModel loginViewModel;
     private SharedPreferenceHelper helper;
-    SharedPreferences sharedPreferences;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         helper = SharedPreferenceHelper.getInstance(requireActivity());
-        sharedPreferences = getActivity().getSharedPreferences("token_account", Context.MODE_PRIVATE);
 
-        if (sharedPreferences.getString("token", null)==null) {
             initial(view);
 
 
@@ -117,11 +114,6 @@ public class LoginFragment extends Fragment {
                             if (tokenResponse != null) {
                                 helper.saveAccessToken(tokenResponse.getAuthorization());
 
-                                SharedPreferences.Editor editor = sharedPreferences.edit();
-                                editor.putString("token", tokenResponse.getAuthorization());
-                                editor.apply();
-
-
                                 Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_berandaFragment);
                                 Toast.makeText(LoginFragment.this.requireActivity(), "Login Success", Toast.LENGTH_SHORT).show();
                             } else {
@@ -133,9 +125,6 @@ public class LoginFragment extends Fragment {
                     }
                 }
             });
-        }else{
-            Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_berandaFragment);
-        }
     }
 
     private void initial(View view) {

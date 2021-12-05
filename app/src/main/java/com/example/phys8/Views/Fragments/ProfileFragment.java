@@ -81,7 +81,6 @@ public class ProfileFragment extends Fragment {
     private Button btn_logout_ProfileFragment;
     private ProfileViewModel profileViewModel;
     private SharedPreferenceHelper helper;
-    SharedPreferences sharedPreferences;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -92,16 +91,11 @@ public class ProfileFragment extends Fragment {
         btn_logout_ProfileFragment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view1) {
-                Toast.makeText(ProfileFragment.this.requireActivity(), sharedPreferences.getString("token", null), Toast.LENGTH_SHORT).show();
                 profileViewModel.logout().observe(requireActivity(), new Observer<String>() {
                     @Override
                     public void onChanged(String s) {
 
                         helper.clearPref();
-
-                        SharedPreferences.Editor editor = sharedPreferences.edit();
-                        editor.clear();
-                        editor.commit();
 
                         Navigation.findNavController(view1).navigate(R.id.action_profilFragment_to_loginFragment);
                         Toast.makeText(requireActivity(), s, Toast.LENGTH_SHORT).show();
@@ -121,10 +115,8 @@ public class ProfileFragment extends Fragment {
     private void initial() {
         btn_logout_ProfileFragment = getActivity().findViewById(R.id.btn_logout_ProfileFragment);
 
-        sharedPreferences = getActivity().getSharedPreferences("token_account", Context.MODE_PRIVATE);
-
         helper = SharedPreferenceHelper.getInstance(requireActivity());
         profileViewModel = new ViewModelProvider(getActivity()).get(ProfileViewModel.class);
-        profileViewModel.init(sharedPreferences.getString("token", null));
+        profileViewModel.init(helper.getAccessToken());
     }
 }
