@@ -1,7 +1,10 @@
 package com.example.phys8.Retrofit;
 
 import com.example.phys8.Helpers.Const;
+import com.example.phys8.Models.Categories;
+import com.example.phys8.Models.Register;
 import com.example.phys8.Models.TokenResponse;
+import com.google.gson.JsonObject;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -57,5 +60,17 @@ public class ApiService {
     //mengakses apiendpoint dengan memasukkan nilai untuk header yang telah diset pada code di atas
     public Call<TokenResponse> login(String email, String password){
         return api.login(email, password);
+    }
+
+    public Call<Register> register(String name, String email, String password, String password_confirmation){
+        return api.register(name, email, password, password_confirmation);
+    }
+
+    public Call<JsonObject> logout(){
+        return api.logout();
+    }
+
+    public Call<Categories> getCategories(){
+        return api.getCategory();
     }
 }
