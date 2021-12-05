@@ -2,6 +2,7 @@ package com.example.phys8.Repositories;
 
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.phys8.Models.Register;
 import com.example.phys8.Models.TokenResponse;
 import com.example.phys8.Retrofit.ApiService;
 
@@ -48,5 +49,28 @@ public class AuthRepository {
             }
         });
         return tokenResponseMutableLiveData;
+    }
+
+    public MutableLiveData<Register> register(String name, String email, String password, String password_confirmation){
+        MutableLiveData<Register> RegisterResponseMutableLiveData = new MutableLiveData<>();
+
+        apiService.register(name, email, password, password_confirmation).enqueue(new Callback<Register>() {
+            @Override
+            public void onResponse(Call<Register> call, Response<Register> response) {
+                if(response.isSuccessful()){
+                    if(response.code() == 200){ //nilai 200 itu artinya jika berhasil
+                        if(response.body() != null){
+                            RegisterResponseMutableLiveData.postValue(response.body());
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Register> call, Throwable t) {
+
+            }
+        });
+        return RegisterResponseMutableLiveData;
     }
 }

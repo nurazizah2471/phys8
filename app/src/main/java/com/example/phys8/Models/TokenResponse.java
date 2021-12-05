@@ -68,6 +68,10 @@ public class TokenResponse implements Parcelable {
         this.refresh_token = refresh_token;
     }
 
+    public String getAuthorization(){
+        return this.token_type + " " + this.access_token;
+    }
+
     @Override
     public int describeContents() {
         return 0;
