@@ -8,8 +8,8 @@
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.example.phys8.Views.Fragments.LoginFragment"
-        android:label="fragment_login2"
-        tools:layout="@layout/fragment_login" >
+        android:label="Login"
+        tools:layout="@layout/fragment_login">
         <action
             android:id="@+id/action_loginFragment_to_registerFragment"
             app:destination="@id/registerFragment" />
@@ -22,8 +22,8 @@
     <fragment
         android:id="@+id/registerFragment"
         android:name="com.example.phys8.Views.Fragments.RegisterFragment"
-        android:label="fragment_register2"
-        tools:layout="@layout/fragment_register" >
+        android:label="Register"
+        tools:layout="@layout/fragment_register">
         <action
             android:id="@+id/action_registerFragment_to_loginFragment"
             app:destination="@id/loginFragment"
@@ -33,18 +33,17 @@
     <fragment
         android:id="@+id/berandaFragment"
         android:name="com.example.phys8.Views.Fragments.BerandaFragment"
-        android:label="fragment_beranda"
-        tools:layout="@layout/fragment_beranda">
-    </fragment>
+        android:label="Beranda"
+        tools:layout="@layout/fragment_beranda"></fragment>
     <fragment
         android:id="@+id/permainanFragment"
         android:name="com.example.phys8.Views.Fragments.PermainanFragment"
-        android:label="fragment_permainan"
+        android:label="Permainan"
         tools:layout="@layout/fragment_permainan" />
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.phys8.Views.Fragments.ProfileFragment"
-        android:label="fragment_profile"
+        android:label="Profil"
         tools:layout="@layout/fragment_profil">
         <action
             android:id="@+id/action_profilFragment_to_loginFragment"

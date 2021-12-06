@@ -17,14 +17,12 @@ public class MainActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
     NavHostFragment nav_fragment_main_menu;
     NavController navController;
-   // Toolbar toolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-       // toolbar = findViewById(R.id.toolbar_main);
-       // setSupportActionBar(toolbar);
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         nav_fragment_main_menu = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_fragment_main_menu);
 
@@ -34,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
             if (destination.getId() == R.id.berandaFragment || destination.getId() == R.id.permainanFragment || destination.getId() == R.id.profileFragment){
                 bottomNavigationView.setVisibility(View.VISIBLE);
 
-              //  getSupportActionBar().show();
             }else {
                 bottomNavigationView.setVisibility(View.GONE);
             }
