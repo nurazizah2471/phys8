@@ -30,4 +30,11 @@ public class CategoryViewModel extends AndroidViewModel {
     public LiveData<Categories> getResultCategories(){
         return resultCategories;
     }
+
+    @Override
+    protected void onCleared() {
+        super.onCleared();
+        categoryRepository.resetInstance();
+    }
+
 }

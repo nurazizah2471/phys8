@@ -34,13 +34,10 @@ public class AuthRepository {
         apiService.login(email, password).enqueue(new Callback<TokenResponse>() {
             @Override
             public void onResponse(Call<TokenResponse> call, Response<TokenResponse> response) {
-                if(response.isSuccessful()){
-                    if(response.code() == 200){ //nilai 200 itu artinya jika berhasil
-                        if(response.body() != null){
+               //nilai 200 itu artinya jika berhasil
+                        if(response.body() != null) {
                             tokenResponseMutableLiveData.postValue(response.body());
                         }
-                    }
-                }
             }
 
             @Override

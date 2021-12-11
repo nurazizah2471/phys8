@@ -6,16 +6,11 @@ import android.os.Parcelable;
 import com.google.gson.Gson;
 
 public class Register implements Parcelable {
-    private String name;
-    private String email;
-    private String password;
-    private String password_confirmation;
+
+    private String status;
 
     protected Register(Parcel in) {
-        name = in.readString();
-        email = in.readString();
-        password = in.readString();
-        password_confirmation = in.readString();
+        status = in.readString();
     }
 
     public static final Creator<Register> CREATOR = new Creator<Register>() {
@@ -35,36 +30,12 @@ public class Register implements Parcelable {
         return new Gson().fromJson(str, Register.class);
     }
 
-    public String getName() {
-        return name;
+    public String getStatus() {
+        return status;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getPassword_confirmation() {
-        return password_confirmation;
-    }
-
-    public void setPassword_confirmation(String password_confirmation) {
-        this.password_confirmation = password_confirmation;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     @Override
@@ -73,10 +44,7 @@ public class Register implements Parcelable {
     }
 
     @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeString(name);
-        parcel.writeString(email);
-        parcel.writeString(password);
-        parcel.writeString(password_confirmation);
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(status);
     }
 }

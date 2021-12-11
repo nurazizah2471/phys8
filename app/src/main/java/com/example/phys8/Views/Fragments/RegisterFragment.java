@@ -13,6 +13,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -75,11 +77,12 @@ public class RegisterFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_register, container, false);
     }
 
-    private TextView txt_login_RegisterFragment;
-    private Button btn_submit_RegisterFragment;
+    private TextView txt_login_RegisterFragment, txt_btn_fragmentRegister;
+    private FrameLayout btn_submit_RegisterFragment;
     private TextInputLayout til_name_RegisterFragment, til_email_RegisterFragment,
             til_password_RegisterFragment, till_password_confirmation_RegisterFragment;
     private RegisterViewModel registerViewModel;
+    private ProgressBar progressBar;
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -97,6 +100,12 @@ public class RegisterFragment extends Fragment {
         btn_submit_RegisterFragment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                progressBar.setVisibility(View.VISIBLE);
+                txt_btn_fragmentRegister.setText("Silakan tunggu");
+                btn_submit_RegisterFragment.setBackground(getResources().getDrawable(R.drawable.bg_btn_red_nonactive));
+                btn_submit_RegisterFragment.setEnabled(false);
+
                 String name = til_name_RegisterFragment.getEditText().getText().toString().trim();
                 String email = til_email_RegisterFragment.getEditText().getText().toString().trim();
                 String pass = til_password_RegisterFragment.getEditText().getText().toString().trim();
@@ -110,16 +119,25 @@ public class RegisterFragment extends Fragment {
                     registerViewModel.register(name, email, pass, cpass).observe(requireActivity(), new Observer<Register>() {
                         @Override
                         public void onChanged(Register registerResponse) {
-                            if (registerResponse != null) {
-                              Navigation.findNavController(view).navigate(R.id.action_registerFragment_to_loginFragment);
-                                Toast.makeText(requireActivity(), "Register Success", Toast.LENGTH_SHORT).show();
-                            } else {
-                                Toast.makeText(requireActivity(), "Regsiter Failed", Toast.LENGTH_SHORT).show();
+                            if (registerResponse.getStatus() == "Registrasi berhasil") {
+                                btn_submit_RegisterFragment.setEnabled(true);
+                                Navigation.findNavController(view).navigate(R.id.action_registerFragment_to_loginFragment);
+                                Toast.makeText(requireActivity(), registerResponse.getStatus(), Toast.LENGTH_SHORT).show();
+                            } else{
+                                progressBar.setVisibility(View.GONE);
+                                txt_btn_fragmentRegister.setText("Daftar");
+                                btn_submit_RegisterFragment.setBackground(getResources().getDrawable(R.drawable.bg_btn_red_active));
+                                btn_submit_RegisterFragment.setEnabled(true);
+                                Toast.makeText(requireActivity(), registerResponse.getStatus(), Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
                 }else{
-                    Toast.makeText(requireActivity(), "All field must not empty", Toast.LENGTH_SHORT).show();
+                    progressBar.setVisibility(View.GONE);
+                    txt_btn_fragmentRegister.setText("Daftar");
+                    btn_submit_RegisterFragment.setBackground(getResources().getDrawable(R.drawable.bg_btn_red_active));
+                    btn_submit_RegisterFragment.setEnabled(true);
+                    Toast.makeText(requireActivity(), "Data tidak boleh kosong", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -132,6 +150,8 @@ public class RegisterFragment extends Fragment {
         til_email_RegisterFragment = getActivity().findViewById(R.id.til_email_RegisterFragment);
         til_password_RegisterFragment = getActivity().findViewById(R.id.til_password_RegisterFragment);
         till_password_confirmation_RegisterFragment = getActivity().findViewById(R.id.til_password_confirmation_RegisterFragment);
+        txt_btn_fragmentRegister = view.findViewById(R.id.txt_btn_fragmentRegister);
+        progressBar = view.findViewById(R.id.progressBar_FragmentRegister);
 
         registerViewModel = new ViewModelProvider(getActivity()).get(RegisterViewModel.class);
     }
