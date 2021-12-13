@@ -34,7 +34,17 @@
         android:id="@+id/berandaFragment"
         android:name="com.example.phys8.Views.Fragments.BerandaFragment"
         android:label="Beranda"
-        tools:layout="@layout/fragment_beranda"></fragment>
+        tools:layout="@layout/fragment_beranda">
+        <action
+            android:id="@+id/action_berandaFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_berandaFragment_to_profileFragment2"
+            app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_berandaFragment_to_permainanFragment"
+            app:destination="@id/permainanFragment" />
+    </fragment>
     <fragment
         android:id="@+id/permainanFragment"
         android:name="com.example.phys8.Views.Fragments.PermainanFragment"
