@@ -8,7 +8,6 @@ import com.google.gson.Gson;
 import java.util.List;
 
 public class Level implements Parcelable {
-
     private List<Result> result;
 
     protected Level(Parcel in) {
@@ -58,6 +57,9 @@ public class Level implements Parcelable {
         private int money_reward;
         private int maximum_time;
         private Category category;
+        private List<Question> question;
+        private String created_at;
+        private String updated_at;
 
         public static Result objectFromData(String str) {
 
@@ -136,6 +138,30 @@ public class Level implements Parcelable {
             this.category = category;
         }
 
+        public List<Question> getQuestion() {
+            return question;
+        }
+
+        public void setQuestion(List<Question> question) {
+            this.question = question;
+        }
+
+        public String getCreated_at() {
+            return created_at;
+        }
+
+        public void setCreated_at(String created_at) {
+            this.created_at = created_at;
+        }
+
+        public String getUpdated_at() {
+            return updated_at;
+        }
+
+        public void setUpdated_at(String updated_at) {
+            this.updated_at = updated_at;
+        }
+
         public static class Category {
             private int id;
             private String name;
@@ -170,6 +196,77 @@ public class Level implements Parcelable {
 
             public void setDescription(String description) {
                 this.description = description;
+            }
+
+            public String getCreated_at() {
+                return created_at;
+            }
+
+            public void setCreated_at(String created_at) {
+                this.created_at = created_at;
+            }
+
+            public String getUpdated_at() {
+                return updated_at;
+            }
+
+            public void setUpdated_at(String updated_at) {
+                this.updated_at = updated_at;
+            }
+        }
+
+        public static class Question {
+            private int id;
+            private int fis8_level_id;
+            private String question_text;
+            private String is_image_answer;
+            private String discussion;
+            private String created_at;
+            private String updated_at;
+
+            public static Question objectFromData(String str) {
+
+                return new Gson().fromJson(str, Question.class);
+            }
+
+            public int getId() {
+                return id;
+            }
+
+            public void setId(int id) {
+                this.id = id;
+            }
+
+            public int getFis8_level_id() {
+                return fis8_level_id;
+            }
+
+            public void setFis8_level_id(int fis8_level_id) {
+                this.fis8_level_id = fis8_level_id;
+            }
+
+            public String getQuestion_text() {
+                return question_text;
+            }
+
+            public void setQuestion_text(String question_text) {
+                this.question_text = question_text;
+            }
+
+            public String getIs_image_answer() {
+                return is_image_answer;
+            }
+
+            public void setIs_image_answer(String is_image_answer) {
+                this.is_image_answer = is_image_answer;
+            }
+
+            public String getDiscussion() {
+                return discussion;
+            }
+
+            public void setDiscussion(String discussion) {
+                this.discussion = discussion;
             }
 
             public String getCreated_at() {
