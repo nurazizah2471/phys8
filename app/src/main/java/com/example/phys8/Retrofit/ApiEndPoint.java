@@ -3,7 +3,10 @@ package com.example.phys8.Retrofit;
 import com.example.phys8.Models.Categories;
 import com.example.phys8.Models.Register;
 import com.example.phys8.Models.TokenResponse;
+import com.example.phys8.Models.User;
 import com.google.gson.JsonObject;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -27,4 +30,7 @@ public interface ApiEndPoint {
 
     @GET("category")
     Call<Categories> getCategory();
+
+    @GET("myuser")
+    Call<User> getUsers();
 }

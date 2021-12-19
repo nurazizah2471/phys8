@@ -12,7 +12,6 @@ import androidx.navigation.Navigation;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -103,7 +102,7 @@ public class RegisterFragment extends Fragment {
 
                 progressBar.setVisibility(View.VISIBLE);
                 txt_btn_fragmentRegister.setText("Silakan tunggu");
-                btn_submit_RegisterFragment.setBackground(getResources().getDrawable(R.drawable.bg_btn_red_nonactive));
+                btn_submit_RegisterFragment.setBackground(getResources().getDrawable(R.drawable.bg_btn_red_inloading));
                 btn_submit_RegisterFragment.setEnabled(false);
 
                 String name = til_name_RegisterFragment.getEditText().getText().toString().trim();

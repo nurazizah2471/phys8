@@ -1,32 +1,32 @@
 package com.example.phys8.Views.Fragments;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
-import android.os.Handler;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.load.engine.Resource;
 import com.example.phys8.Helpers.SharedPreferenceHelper;
+import com.example.phys8.Models.User;
 import com.example.phys8.R;
 import com.example.phys8.ViewModels.LoginViewModel;
+import com.example.phys8.ViewModels.UserViewModel;
 import com.google.android.material.textfield.TextInputLayout;
+
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -85,8 +85,10 @@ public class LoginFragment extends Fragment {
     private FrameLayout btn_submit_LoginFragment;
     private TextView txt_register_LoginFragment, txt_btn_fragmentLogin;
     private LoginViewModel loginViewModel;
+    private UserViewModel userViewModel;
     private SharedPreferenceHelper helper;
     private ProgressBar progressBar;
+    private String objEmailLogin, objPassLogin;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -94,80 +96,144 @@ public class LoginFragment extends Fragment {
 
         helper = SharedPreferenceHelper.getInstance(requireActivity());
 
-            initial(view);
+        initial(view);
 
+        setActivationButton(false);
 
+        userViewModel.getUsers();
+        userViewModel.getResultUsers().observe(getActivity(), showResultUser);
             txt_register_LoginFragment.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
                     Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_registerFragment);
                 }
             });
+    }
 
-            loginViewModel = new ViewModelProvider(getActivity()).get(LoginViewModel.class);
-            helper = SharedPreferenceHelper.getInstance(requireActivity());
-            btn_submit_LoginFragment.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
+    private Observer<List<User.Result>> showResultUser = new Observer<List<User.Result>>() {
+        @Override
+        public void onChanged(List<User.Result> user) {
+           ongoingTextInput(user);
+        }
+    };
 
-                    progressBar.setVisibility(View.VISIBLE);
-                    txt_btn_fragmentLogin.setText("Silakan tunggu");
-                    btn_submit_LoginFragment.setBackground(getResources().getDrawable(R.drawable.bg_btn_red_nonactive));
-                    btn_submit_LoginFragment.setEnabled(false);
+    private void ongoingTextInput(List<User.Result> user){
+        til_email_LoginFragment.getEditText().addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
 
-                    String email = til_email_LoginFragment.getEditText().getText().toString().trim();
-                    String pass = til_password_LoginFragment.getEditText().getText().toString().trim();
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                tilCheckToDatabase(user);
+            }
 
-                    if (!email.isEmpty()
-                            && !pass.isEmpty()) {
+            @Override
+            public void afterTextChanged(Editable s) {
 
+            }
+        });
 
+        til_password_LoginFragment.getEditText().addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
 
-                        loginViewModel.login(email, pass).observe(LoginFragment.this.requireActivity(), tokenResponse -> {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                tilCheckToDatabase(user);
+            }
 
-                           // scrollView_fragmentLogin.setVisibility(View.VISIBLE);
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
 
-                            if (tokenResponse != null) {
+        loginProccess();
+    }
 
-                                if(tokenResponse.getResult()!=null) {
-                                    btn_submit_LoginFragment.setEnabled(true);
-                                    helper.saveAccessToken(tokenResponse.getResult().getAuthorization());
+    private void loginProccess(){
+        btn_submit_LoginFragment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
-                                    Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_berandaFragment);
-                                    Toast.makeText(LoginFragment.this.requireActivity(), tokenResponse.getStatus(), Toast.LENGTH_SHORT).show();
-                                }else{
-                                    progressBar.setVisibility(View.GONE);
-                                    txt_btn_fragmentLogin.setText("Masuk");
-                                    btn_submit_LoginFragment.setBackground(getResources().getDrawable(R.drawable.bg_btn_red_active));
-                                    btn_submit_LoginFragment.setEnabled(true);
-                                    Toast.makeText(LoginFragment.this.requireActivity(), tokenResponse.getStatus(), Toast.LENGTH_SHORT).show();
-                                }
-                            } else {
-                                progressBar.setVisibility(View.GONE);
-                                txt_btn_fragmentLogin.setText("Masuk");
-                                btn_submit_LoginFragment.setBackground(getResources().getDrawable(R.drawable.bg_btn_red_active));
-                                btn_submit_LoginFragment.setEnabled(true);
-                                Toast.makeText(LoginFragment.this.requireActivity(), "Terjadi kesalahan", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                    } else {
+              loadingButtonSubmitLogin(true);
 
-                        new Handler().postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                progressBar.setVisibility(View.GONE);
-                                txt_btn_fragmentLogin.setText("Masuk");
-                                btn_submit_LoginFragment.setBackground(getResources().getDrawable(R.drawable.bg_btn_red_active));
-                                btn_submit_LoginFragment.setEnabled(true);
+              objEmailLogin = til_email_LoginFragment.getEditText().getText().toString().trim();
+              objPassLogin = til_password_LoginFragment.getEditText().getText().toString().trim();
 
-                                Toast.makeText(LoginFragment.this.requireActivity(), "Masukkan email dan kata sandi", Toast.LENGTH_SHORT).show();
-                            }
-                        }, 200);
+              loginViewModel.login(objEmailLogin, objPassLogin).observe(LoginFragment.this.requireActivity(), tokenResponse -> {
 
-                    }
+                  if (tokenResponse != null) {
+                      if(tokenResponse.getResult()!=null) {
+                          btn_submit_LoginFragment.setEnabled(true);
+                          helper.saveAccessToken(tokenResponse.getResult().getAuthorization());
+
+                          Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_berandaFragment);
+                          Toast.makeText(LoginFragment.this.requireActivity(), tokenResponse.getStatus(), Toast.LENGTH_SHORT).show();
+                      }else{
+                          loadingButtonSubmitLogin(false);
+                          Toast.makeText(LoginFragment.this.requireActivity(), tokenResponse.getStatus(), Toast.LENGTH_SHORT).show();
+                      }
+                  } else {
+                      loadingButtonSubmitLogin(false);
+                      Toast.makeText(LoginFragment.this.requireActivity(), "Terjadi kesalahan", Toast.LENGTH_SHORT).show();
+                  }
+              });
+            }
+        });
+    }
+
+    private void setActivationButton(Boolean check){
+        btn_submit_LoginFragment.setEnabled(check);
+        if(check){
+            btn_submit_LoginFragment.setBackgroundResource(R.drawable.bg_btn_red_active);
+        }else{
+            btn_submit_LoginFragment.setBackgroundResource(R.drawable.bg_btn_nonactive);
+        }
+    }
+
+    private void loadingButtonSubmitLogin(Boolean check){
+        if(check){
+            btn_submit_LoginFragment.setEnabled(!check);
+            progressBar.setVisibility(View.VISIBLE);
+            txt_btn_fragmentLogin.setText("Silakan tunggu");
+            btn_submit_LoginFragment.setBackground(getResources().getDrawable(R.drawable.bg_btn_red_inloading));
+        }else{
+            progressBar.setVisibility(View.GONE);
+            txt_btn_fragmentLogin.setText("Masuk");
+            btn_submit_LoginFragment.setBackground(getResources().getDrawable(R.drawable.bg_btn_red_active));
+            btn_submit_LoginFragment.setEnabled(!check);
+        }
+    }
+
+    private void tilCheckToDatabase(List<User.Result> user){
+        objEmailLogin = til_email_LoginFragment.getEditText().getText().toString().trim();
+        objPassLogin = til_password_LoginFragment.getEditText().getText().toString().trim();
+
+        if (objEmailLogin.length() > 0) {
+            for (int i = 0; i < user.size(); i++) {
+                if (user.get(i).getEmail().equals(objEmailLogin)) {
+                    til_email_LoginFragment.setError("");
+                    setActivationButton(true);
+                    break;
+                } else if (user.get(i).getEmail() != objEmailLogin && i == user.size() - 1) {
+                    til_email_LoginFragment.setError("Akun tidak tersedia");
+                    setActivationButton(false);
+                }else {
+                    setActivationButton(false);
                 }
-            });
+            }
+        }
+        if (objEmailLogin.length() == 0) {
+            til_email_LoginFragment.setError("Email tidak boleh kosong");
+            setActivationButton(false);
+        } if (objPassLogin.length() == 0) {
+            til_password_LoginFragment.setError("Password tidak boleh kosong");
+            setActivationButton(false);
+        }else{
+            til_password_LoginFragment.setError("");
+        }
     }
 
     private void initial(View view) {
@@ -179,6 +245,6 @@ public class LoginFragment extends Fragment {
         txt_btn_fragmentLogin = view.findViewById(R.id.txt_btn_fragmentLogin);
 
         loginViewModel = new ViewModelProvider(getActivity()).get(LoginViewModel.class);
+        userViewModel = new ViewModelProvider(getActivity()).get(UserViewModel.class);
     }
-
 }

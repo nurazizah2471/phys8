@@ -4,7 +4,10 @@ import com.example.phys8.Helpers.Const;
 import com.example.phys8.Models.Categories;
 import com.example.phys8.Models.Register;
 import com.example.phys8.Models.TokenResponse;
+import com.example.phys8.Models.User;
 import com.google.gson.JsonObject;
+
+import java.util.List;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -73,4 +76,5 @@ public class ApiService {
     public Call<Categories> getCategories(){
         return api.getCategory();
     }
+    public Call<User> getUsers(){ return api.getUsers(); }
 }
