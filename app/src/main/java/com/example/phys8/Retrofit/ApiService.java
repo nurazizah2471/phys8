@@ -2,6 +2,8 @@ package com.example.phys8.Retrofit;
 
 import com.example.phys8.Helpers.Const;
 import com.example.phys8.Models.Categories;
+import com.example.phys8.Models.GetQuestionWithLevelid;
+import com.example.phys8.Models.Level;
 import com.example.phys8.Models.Register;
 import com.example.phys8.Models.TokenResponse;
 import com.example.phys8.Models.User;
@@ -77,4 +79,6 @@ public class ApiService {
         return api.getCategory();
     }
     public Call<User> getUsers(){ return api.getUsers(); }
+    public Call<List<GetQuestionWithLevelid.Result>> getQuestionWithLevelId(String levelId) {return api.getQuestionWithLevelId(levelId);}
+    public Call<Level> getAllLevel(){ return api.getAllLevel(); }
 }

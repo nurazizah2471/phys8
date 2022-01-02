@@ -2,11 +2,15 @@ package com.example.phys8.Views.Fragments;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.example.phys8.R;
 
@@ -62,5 +66,25 @@ public class BerandaFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_beranda, container, false);
+    }
+
+    private Button btnPlayGame_berandaFragment;
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        inisialisasi();
+
+        btnPlayGame_berandaFragment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(view).navigate(R.id.action_berandaFragment_to_pilihLevelFragment);
+            }
+        });
+    }
+
+    private void inisialisasi() {
+        btnPlayGame_berandaFragment = getActivity().findViewById(R.id.btnPlayGame_berandaFragment);
     }
 }

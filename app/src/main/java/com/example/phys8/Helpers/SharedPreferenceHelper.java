@@ -7,7 +7,7 @@ import android.preference.PreferenceManager;
 public class SharedPreferenceHelper {
     private static final String PREFS = "pref";
     private static SharedPreferenceHelper instance;
-    private SharedPreferences prefs;
+    private static SharedPreferences prefs;
 
     private SharedPreferenceHelper(Context context){
         prefs = PreferenceManager.getDefaultSharedPreferences(context);
@@ -20,7 +20,7 @@ public class SharedPreferenceHelper {
         return instance;
     }
 
-    public void saveAccessToken(String token){
+    public static void saveAccessToken(String token){
         prefs.edit().putString(PREFS, token).apply();
     }
 
@@ -28,7 +28,7 @@ public class SharedPreferenceHelper {
         prefs.edit().putString(PREFS, token).apply();
     }
 
-    public String getAccessToken(){
+    public static String getAccessToken(){
         return prefs.getString(PREFS, "");
     }
 

@@ -1,6 +1,8 @@
 package com.example.phys8.Retrofit;
 
 import com.example.phys8.Models.Categories;
+import com.example.phys8.Models.GetQuestionWithLevelid;
+import com.example.phys8.Models.Level;
 import com.example.phys8.Models.Register;
 import com.example.phys8.Models.TokenResponse;
 import com.example.phys8.Models.User;
@@ -13,6 +15,7 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 
 public interface ApiEndPoint {
     @POST("login")
@@ -33,4 +36,11 @@ public interface ApiEndPoint {
 
     @GET("myuser")
     Call<User> getUsers();
+
+
+    @GET("question/{levelId}")
+    Call<List<GetQuestionWithLevelid.Result>> getQuestionWithLevelId(@Path("levelId") String levelId);
+
+    @GET("level")
+    Call<Level> getAllLevel();
 }

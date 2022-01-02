@@ -28,14 +28,14 @@ public class MainActivity extends AppCompatActivity {
 
         AppBarConfiguration configuration = new AppBarConfiguration.Builder(R.id.berandaFragment, R.id.permainanFragment, R.id.profileFragment).build();
         navController = nav_fragment_main_menu.getNavController();
-        navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
-            if (destination.getId() == R.id.berandaFragment || destination.getId() == R.id.permainanFragment || destination.getId() == R.id.profileFragment){
-                bottomNavigationView.setVisibility(View.VISIBLE);
+        //navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
+           // if (destination.getId() == R.id.berandaFragment || destination.getId() == R.id.permainanFragment || destination.getId() == R.id.profileFragment){
+              //  bottomNavigationView.setVisibility(View.VISIBLE);
 
-            }else {
+            //}else {
                 bottomNavigationView.setVisibility(View.GONE);
-            }
-        });
+            //}
+        //});
 
         NavigationUI.setupActionBarWithNavController(MainActivity.this, navController, configuration);
         NavigationUI.setupWithNavController(bottomNavigationView, navController);

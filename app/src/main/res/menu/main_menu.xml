@@ -6,6 +6,10 @@
 
         android:title="Beranda" />
     <item
+        android:id="@+id/pilihLevelFragment"
+
+        android:title="Pilih Level" />
+    <item
         android:id="@+id/permainanFragment"
         android:title="Permainan" />
     <item
