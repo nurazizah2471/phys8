@@ -79,6 +79,6 @@ public class ApiService {
         return api.getCategory();
     }
     public Call<User> getUsers(){ return api.getUsers(); }
-    public Call<List<GetQuestionWithLevelid.Result>> getQuestionWithLevelId(String levelId) {return api.getQuestionWithLevelId(levelId);}
+    public Call<GetQuestionWithLevelid> getQuestionWithLevelId(String levelId) {return api.getQuestionWithLevelId(levelId);}
     public Call<Level> getAllLevel(){ return api.getAllLevel(); }
 }

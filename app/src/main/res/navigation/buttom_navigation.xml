@@ -49,7 +49,12 @@
         android:id="@+id/permainanFragment"
         android:name="com.example.phys8.Views.Fragments.PermainanFragment"
         android:label="Permainan"
-        tools:layout="@layout/fragment_permainan" />
+        tools:layout="@layout/fragment_permainan">
+    <argument
+        android:name="levelId"
+        android:defaultValue="null"
+        app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.phys8.Views.Fragments.ProfileFragment"

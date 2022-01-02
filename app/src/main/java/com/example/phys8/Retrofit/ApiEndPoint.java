@@ -39,7 +39,7 @@ public interface ApiEndPoint {
 
 
     @GET("question/{levelId}")
-    Call<List<GetQuestionWithLevelid.Result>> getQuestionWithLevelId(@Path("levelId") String levelId);
+    Call<GetQuestionWithLevelid> getQuestionWithLevelId(@Path("levelId") String levelId);
 
     @GET("level")
     Call<Level> getAllLevel();

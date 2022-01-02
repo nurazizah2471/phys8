@@ -40,18 +40,18 @@ public class PermainanRepository {
     public MutableLiveData<List<GetQuestionWithLevelid.Result>> getQuestionWithLevelId(String levelId){
         final MutableLiveData<List<GetQuestionWithLevelid.Result>> listQuestionWithLevelId = new MutableLiveData<>();
 
-        apiService.getQuestionWithLevelId(levelId).enqueue(new Callback<List<GetQuestionWithLevelid.Result>>() {
+        apiService.getQuestionWithLevelId(levelId).enqueue(new Callback<GetQuestionWithLevelid>() {
             @Override
-            public void onResponse(Call<List<GetQuestionWithLevelid.Result>> call, Response<List<GetQuestionWithLevelid.Result>> response) {
+            public void onResponse(Call<GetQuestionWithLevelid> call, Response<GetQuestionWithLevelid> response) {
 
                 if (response.isSuccessful()){
-                        listQuestionWithLevelId.postValue(response.body());
+                        listQuestionWithLevelId.postValue(response.body().getResult());
 
                 }
             }
 
             @Override
-            public void onFailure(Call<List<GetQuestionWithLevelid.Result>> call, Throwable t) {
+            public void onFailure(Call<GetQuestionWithLevelid> call, Throwable t) {
             }
         });
 

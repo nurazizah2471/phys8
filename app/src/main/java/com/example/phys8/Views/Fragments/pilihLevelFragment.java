@@ -7,6 +7,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.phys8.Adapters.rvAdapter_level;
+import com.example.phys8.Helpers.ItemClickSupport;
 import com.example.phys8.Helpers.SharedPreferenceHelper;
 import com.example.phys8.Models.Level;
 import com.example.phys8.R;
@@ -86,11 +88,13 @@ public class pilihLevelFragment extends Fragment {
     private PermainanViewModel permainanViewModel;
     private SharedPreferenceHelper helper;
     private int numberOfColumns;
+    private Bundle bundle;
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         inisialisasi();
+        addItemClickSupport();
 
 
         permainanViewModel.init(helper.getAccessToken());
@@ -126,6 +130,19 @@ public class pilihLevelFragment extends Fragment {
             setRV_level(results);
         }
     };
+
+    private void addItemClickSupport(){
+        ItemClickSupport.addTo(rv_level_pilihLevelFragment).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+            @Override
+            public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+
+                bundle=new Bundle();
+                bundle.putString("levelId", ""+ adapter_level.getListLevel().get(position).getId());
+
+                Navigation.findNavController(v).navigate(R.id.action_pilihLevelFragment_to_permainanFragment,bundle);
+            }
+        });
+    }
 
     @Override
     public void onDetach() {

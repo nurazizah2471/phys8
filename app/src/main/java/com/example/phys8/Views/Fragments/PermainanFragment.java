@@ -8,6 +8,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -86,14 +87,17 @@ public class PermainanFragment extends Fragment {
     private PermainanViewModel permainanViewModel;
     private SharedPreferenceHelper helper;
     private rvAdapter_ikonBenarSalahKuis adapter_ikonBenarSalahKuis;
+    private String levelId;
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         inisialisasi(view);
 
+        levelId=getArguments().getString("levelId");
+
         permainanViewModel.init(helper.getAccessToken());
-        permainanViewModel.getQuestionWithLevelId("1");
+        permainanViewModel.getQuestionWithLevelId(levelId);
         permainanViewModel.getResultQuestionWithLevelId().observe(getActivity(), showQuestion);
 
     }
@@ -105,8 +109,7 @@ public class PermainanFragment extends Fragment {
     };
 
     private void setRv_IkonBenarSalah(List<GetQuestionWithLevelid.Result> questions){
-        rv_IkonBenarSalah_FragmentPermainan.setLayoutManager(new LinearLayoutManager(getActivity(),
-                LinearLayoutManager.HORIZONTAL, false));
+        rv_IkonBenarSalah_FragmentPermainan.setLayoutManager(new GridLayoutManager(getContext(), questions.size()));
         adapter_ikonBenarSalahKuis = new rvAdapter_ikonBenarSalahKuis(getActivity());
         adapter_ikonBenarSalahKuis.setListQuestionUserAdapter(questions, 1);
         rv_IkonBenarSalah_FragmentPermainan.setAdapter(adapter_ikonBenarSalahKuis);
