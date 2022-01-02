@@ -86,7 +86,7 @@ public class PermainanFragment extends Fragment {
     private TextInputLayout teksInput_FragmentPermainan;
     private PermainanViewModel permainanViewModel;
     private SharedPreferenceHelper helper;
-    private rvAdapter_ikonBenarSalahKuis adapter_ikonBenarSalahKuis;
+   // private rvAdapter_ikonBenarSalahKuis adapter_ikonBenarSalahKuis;
     private String levelId;
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -104,22 +104,22 @@ public class PermainanFragment extends Fragment {
     private Observer<List<GetQuestionWithLevelid.Result>> showQuestion = new Observer<List<GetQuestionWithLevelid.Result>>() {
         @Override
         public void onChanged(List<GetQuestionWithLevelid.Result> results) {
-                setRv_IkonBenarSalah(results);
+               // setRv_IkonBenarSalah(results);
         }
     };
 
-    private void setRv_IkonBenarSalah(List<GetQuestionWithLevelid.Result> questions){
-        rv_IkonBenarSalah_FragmentPermainan.setLayoutManager(new GridLayoutManager(getContext(), questions.size()));
-        adapter_ikonBenarSalahKuis = new rvAdapter_ikonBenarSalahKuis(getActivity());
-        adapter_ikonBenarSalahKuis.setListQuestionUserAdapter(questions, 1);
-        rv_IkonBenarSalah_FragmentPermainan.setAdapter(adapter_ikonBenarSalahKuis);
-    }
+  //  private void setRv_IkonBenarSalah(List<GetQuestionWithLevelid.Result> questions){
+    //    rv_IkonBenarSalah_FragmentPermainan.setLayoutManager(new GridLayoutManager(getContext(), questions.size()));
+      //  adapter_ikonBenarSalahKuis = new rvAdapter_ikonBenarSalahKuis(getActivity());
+       // adapter_ikonBenarSalahKuis.setListQuestionUserAdapter(questions, help);
+        //rv_IkonBenarSalah_FragmentPermainan.setAdapter(adapter_ikonBenarSalahKuis);
+    //}
 
     private void inisialisasi(View view) {
-        rv_IkonBenarSalah_FragmentPermainan = view.findViewById(R.id.rv_IkonBenarSalah_FragmentPermainan);
-        rv_PilihanGanda_FragmentPermainan = view.findViewById(R.id.rv_PilihanGanda_FragmentPermainan);
-        soal_FragmentPermainan = view.findViewById(R.id.soal_FragmentPermainan);
-        teksInput_FragmentPermainan = view.findViewById(R.id.teksInput_FragmentPermainan);
+      //  rv_IkonBenarSalah_FragmentPermainan = view.findViewById(R.id.rv_IkonBenarSalah_FragmentPermainan);
+        //rv_PilihanGanda_FragmentPermainan = view.findViewById(R.id.rv_PilihanGanda_FragmentPermainan);
+        //soal_FragmentPermainan = view.findViewById(R.id.soal_FragmentPermainan);
+        //teksInput_FragmentPermainan = view.findViewById(R.id.teksInput_FragmentPermainan);
 
         permainanViewModel=new ViewModelProvider(getActivity()).get(PermainanViewModel.class);
     }

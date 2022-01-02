@@ -114,7 +114,7 @@ public class pilihLevelFragment extends Fragment {
     private void setRV_level(List<Level.Result> levels) {
         if(levels.size()>0) {
             keteranganLevel_levelFragment.setVisibility(View.GONE);
-            rv_level_pilihLevelFragment.setLayoutManager(new GridLayoutManager(getContext(), numberOfColumns));
+            rv_level_pilihLevelFragment.setLayoutManager(new GridLayoutManager(getContext(), levels.size()));
             adapter_level = new rvAdapter_level(getActivity());
             adapter_level.setListLevelAdapter(levels);
             rv_level_pilihLevelFragment.setAdapter(adapter_level);

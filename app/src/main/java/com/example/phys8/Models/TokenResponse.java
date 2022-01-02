@@ -7,11 +7,14 @@ import com.google.gson.Gson;
 
 public class TokenResponse implements Parcelable {
 
+
     private String status;
+    private String userId;
     private Result result;
 
     protected TokenResponse(Parcel in) {
         status = in.readString();
+        userId = in.readString();
     }
 
     public static final Creator<TokenResponse> CREATOR = new Creator<TokenResponse>() {
@@ -39,6 +42,14 @@ public class TokenResponse implements Parcelable {
         this.status = status;
     }
 
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
     public Result getResult() {
         return result;
     }
@@ -55,6 +66,7 @@ public class TokenResponse implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(status);
+        dest.writeString(userId);
     }
 
     public static class Result {
@@ -99,6 +111,7 @@ public class TokenResponse implements Parcelable {
         public void setRefresh_token(String refresh_token) {
             this.refresh_token = refresh_token;
         }
+
         public String getAuthorization() {
             return  this.token_type + "" + this.access_token;
         }

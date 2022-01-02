@@ -167,7 +167,7 @@ public class LoginFragment extends Fragment {
                   if (tokenResponse != null) {
                       if(tokenResponse.getResult()!=null) {
                           btn_submit_LoginFragment.setEnabled(true);
-                          helper.saveAccessToken(tokenResponse.getResult().getAuthorization());
+                          helper.saveAccessToken(tokenResponse.getResult().getAuthorization(), tokenResponse.getUserId());
 
                           Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_berandaFragment);
                           Toast.makeText(LoginFragment.this.requireActivity(), tokenResponse.getStatus(), Toast.LENGTH_SHORT).show();

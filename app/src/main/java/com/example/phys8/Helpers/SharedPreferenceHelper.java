@@ -8,9 +8,12 @@ public class SharedPreferenceHelper {
     private static final String PREFS = "pref";
     private static SharedPreferenceHelper instance;
     private static SharedPreferences prefs;
+    private static SharedPreferences userId;
+    private static final String USERID = "userId";
 
     private SharedPreferenceHelper(Context context){
         prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        userId = PreferenceManager.getDefaultSharedPreferences(context);
     }
 
     public static SharedPreferenceHelper getInstance(Context context){
@@ -20,8 +23,9 @@ public class SharedPreferenceHelper {
         return instance;
     }
 
-    public static void saveAccessToken(String token){
+    public static void saveAccessToken(String token, String userIdobj){
         prefs.edit().putString(PREFS, token).apply();
+        userId.edit().putString(USERID, userIdobj).apply();
     }
 
     public void saveRefreshToken(String token){
@@ -30,6 +34,10 @@ public class SharedPreferenceHelper {
 
     public static String getAccessToken(){
         return prefs.getString(PREFS, "");
+    }
+
+    public static String getUserId(){
+        return userId.getString(USERID, "");
     }
 
     public void clearPref() {
