@@ -3,6 +3,7 @@ package com.example.phys8.Retrofit;
 import com.example.phys8.Models.Categories;
 import com.example.phys8.Models.GetQuestionWithLevelid;
 import com.example.phys8.Models.Level;
+import com.example.phys8.Models.QuizHistory;
 import com.example.phys8.Models.Register;
 import com.example.phys8.Models.TokenResponse;
 import com.example.phys8.Models.User;
@@ -43,4 +44,8 @@ public interface ApiEndPoint {
 
     @GET("level")
     Call<Level> getAllLevel();
+
+    @POST("quiz_history")
+    @FormUrlEncoded
+    Call<QuizHistory.Result> addQuizHistory(@Field("student_id") String student_id);
 }

@@ -8,6 +8,7 @@ import com.google.gson.Gson;
 import java.util.List;
 
 public class Level implements Parcelable {
+
     private List<Result> result;
 
     protected Level(Parcel in) {
@@ -219,7 +220,7 @@ public class Level implements Parcelable {
             private int id;
             private int fis8_level_id;
             private String question_text;
-            private String is_image_answer;
+            private String correct_answer_option;
             private String discussion;
             private String created_at;
             private String updated_at;
@@ -253,12 +254,12 @@ public class Level implements Parcelable {
                 this.question_text = question_text;
             }
 
-            public String getIs_image_answer() {
-                return is_image_answer;
+            public String getCorrect_answer_option() {
+                return correct_answer_option;
             }
 
-            public void setIs_image_answer(String is_image_answer) {
-                this.is_image_answer = is_image_answer;
+            public void setCorrect_answer_option(String correct_answer_option) {
+                this.correct_answer_option = correct_answer_option;
             }
 
             public String getDiscussion() {

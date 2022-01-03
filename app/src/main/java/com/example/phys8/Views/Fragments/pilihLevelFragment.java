@@ -22,8 +22,10 @@ import com.example.phys8.Adapters.rvAdapter_level;
 import com.example.phys8.Helpers.ItemClickSupport;
 import com.example.phys8.Helpers.SharedPreferenceHelper;
 import com.example.phys8.Models.Level;
+import com.example.phys8.Models.QuizHistory;
 import com.example.phys8.R;
 import com.example.phys8.ViewModels.PermainanViewModel;
+import com.example.phys8.ViewModels.QuizHistoryViewModel;
 
 import java.util.List;
 import java.util.ListIterator;
@@ -86,14 +88,17 @@ public class pilihLevelFragment extends Fragment {
     private rvAdapter_level adapter_level;
     private TextView keteranganLevel_levelFragment;
     private PermainanViewModel permainanViewModel;
+    private QuizHistoryViewModel quizHistoryViewModel;
     private SharedPreferenceHelper helper;
     private int numberOfColumns;
+    private int bundleLevelId;
+    private View myv;
     private Bundle bundle;
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        inisialisasi();
+        inisialisasi(view);
         addItemClickSupport();
 
 
@@ -104,12 +109,14 @@ public class pilihLevelFragment extends Fragment {
 
     }
 
-    private void inisialisasi() {
+    private void inisialisasi(View view) {
         rv_level_pilihLevelFragment=getActivity().findViewById(R.id.rv_level_pilihLevelFragment);
         keteranganLevel_levelFragment = getActivity().findViewById(R.id.keteranganLevel_levelFragment);
         numberOfColumns = 5;
+        myv = view;
 
         permainanViewModel=new ViewModelProvider(getActivity()).get(PermainanViewModel.class);
+        quizHistoryViewModel=new ViewModelProvider(getActivity()).get(QuizHistoryViewModel.class);
     }
     private void setRV_level(List<Level.Result> levels) {
         if(levels.size()>0) {
@@ -131,15 +138,32 @@ public class pilihLevelFragment extends Fragment {
         }
     };
 
+    private Observer<QuizHistory.Result> showResultAddQuizHistory = new Observer<QuizHistory.Result>() {
+        @Override
+        public void onChanged(QuizHistory.Result results) {
+           System.out.println("Hi"+results);
+            if(results!=null){
+                bundle=new Bundle();
+                bundle.putString("levelId", ""+ bundleLevelId);
+                bundle.putString("quizHistoryId", ""+ results.getId());
+
+                Navigation.findNavController(myv).navigate(R.id.action_pilihLevelFragment_to_permainanFragment,bundle);
+            }else{
+                Toast.makeText(getActivity(), "Terjadi Kesalahan", Toast.LENGTH_SHORT).show();
+            }
+        }
+    };
+
     private void addItemClickSupport(){
         ItemClickSupport.addTo(rv_level_pilihLevelFragment).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
             @Override
             public void onItemClicked(RecyclerView recyclerView, int position, View v) {
 
-                bundle=new Bundle();
-                bundle.putString("levelId", ""+ adapter_level.getListLevel().get(position).getId());
+                bundleLevelId = adapter_level.getListLevel().get(position).getId();
 
-                Navigation.findNavController(v).navigate(R.id.action_pilihLevelFragment_to_permainanFragment,bundle);
+                quizHistoryViewModel.init(helper.getAccessToken());
+                quizHistoryViewModel.addQuizHistory(helper.getUserId());
+                quizHistoryViewModel.getResultAddQuizHistory().observe(getActivity(), showResultAddQuizHistory);
             }
         });
     }

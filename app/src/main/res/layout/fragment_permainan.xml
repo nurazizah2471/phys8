@@ -14,13 +14,23 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" >
 
+            <TextView
+                android:id="@+id/timer_permainanFragment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="TextView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_IkonBenarSalah_FragmentPermainan"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/timer_permainanFragment" />
 
             <TextView
                 android:id="@+id/soal_FragmentPermainan"

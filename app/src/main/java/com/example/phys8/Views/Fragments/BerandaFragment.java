@@ -11,7 +11,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
+import com.example.phys8.Helpers.SharedPreferenceHelper;
 import com.example.phys8.R;
 
 /**
@@ -69,6 +71,8 @@ public class BerandaFragment extends Fragment {
     }
 
     private Button btnPlayGame_berandaFragment;
+    private TextView textView12;
+    private SharedPreferenceHelper helper;
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -86,5 +90,6 @@ public class BerandaFragment extends Fragment {
 
     private void inisialisasi() {
         btnPlayGame_berandaFragment = getActivity().findViewById(R.id.btnPlayGame_berandaFragment);
+        textView12 = getActivity().findViewById(R.id.textView12);
     }
 }

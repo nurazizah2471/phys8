@@ -4,6 +4,7 @@ import com.example.phys8.Helpers.Const;
 import com.example.phys8.Models.Categories;
 import com.example.phys8.Models.GetQuestionWithLevelid;
 import com.example.phys8.Models.Level;
+import com.example.phys8.Models.QuizHistory;
 import com.example.phys8.Models.Register;
 import com.example.phys8.Models.TokenResponse;
 import com.example.phys8.Models.User;
@@ -81,4 +82,6 @@ public class ApiService {
     public Call<User> getUsers(){ return api.getUsers(); }
     public Call<GetQuestionWithLevelid> getQuestionWithLevelId(String levelId) {return api.getQuestionWithLevelId(levelId);}
     public Call<Level> getAllLevel(){ return api.getAllLevel(); }
+    public Call<QuizHistory.Result> addQuizHistory(String student_id){ return api.addQuizHistory(student_id); }
+
 }

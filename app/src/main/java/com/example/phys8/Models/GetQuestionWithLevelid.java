@@ -9,6 +9,7 @@ import java.util.List;
 
 public class GetQuestionWithLevelid implements Parcelable {
 
+
     private List<Result> result;
 
     protected GetQuestionWithLevelid(Parcel in) {
@@ -51,13 +52,11 @@ public class GetQuestionWithLevelid implements Parcelable {
     public static class Result {
         private int id;
         private String question_text;
-        private String is_image_answer;
+        private String correct_answer_option;
         private String discussion;
         private Level level;
-        private List<QuestionAnswerImage> question_answer_image;
-        private List<AnswerOptionText> answer_option_text;
-        private List<History> history;
-        private List<QuestionImage> question_image;
+        private List<AnswerOption> answer_option;
+        private List<QuizHistories> quiz_histories;
         private String created_at;
         private String updated_at;
 
@@ -82,12 +81,12 @@ public class GetQuestionWithLevelid implements Parcelable {
             this.question_text = question_text;
         }
 
-        public String getIs_image_answer() {
-            return is_image_answer;
+        public String getCorrect_answer_option() {
+            return correct_answer_option;
         }
 
-        public void setIs_image_answer(String is_image_answer) {
-            this.is_image_answer = is_image_answer;
+        public void setCorrect_answer_option(String correct_answer_option) {
+            this.correct_answer_option = correct_answer_option;
         }
 
         public String getDiscussion() {
@@ -106,36 +105,20 @@ public class GetQuestionWithLevelid implements Parcelable {
             this.level = level;
         }
 
-        public List<QuestionAnswerImage> getQuestion_answer_image() {
-            return question_answer_image;
+        public List<AnswerOption> getAnswer_option() {
+            return answer_option;
         }
 
-        public void setQuestion_answer_image(List<QuestionAnswerImage> question_answer_image) {
-            this.question_answer_image = question_answer_image;
+        public void setAnswer_option(List<AnswerOption> answer_option) {
+            this.answer_option = answer_option;
         }
 
-        public List<AnswerOptionText> getAnswer_option_text() {
-            return answer_option_text;
+        public List<QuizHistories> getQuiz_histories() {
+            return quiz_histories;
         }
 
-        public void setAnswer_option_text(List<AnswerOptionText> answer_option_text) {
-            this.answer_option_text = answer_option_text;
-        }
-
-        public List<History> getHistory() {
-            return history;
-        }
-
-        public void setHistory(List<History> history) {
-            this.history = history;
-        }
-
-        public List<QuestionImage> getQuestion_image() {
-            return question_image;
-        }
-
-        public void setQuestion_image(List<QuestionImage> question_image) {
-            this.question_image = question_image;
+        public void setQuiz_histories(List<QuizHistories> quiz_histories) {
+            this.quiz_histories = quiz_histories;
         }
 
         public String getCreated_at() {
@@ -261,16 +244,17 @@ public class GetQuestionWithLevelid implements Parcelable {
             }
         }
 
-        public static class QuestionAnswerImage {
+        public static class AnswerOption {
             private int id;
-            private String image;
+            private String option_text;
+            private String is_image;
             private String created_at;
             private String updated_at;
             private Pivot pivot;
 
-            public static QuestionAnswerImage objectFromData(String str) {
+            public static AnswerOption objectFromData(String str) {
 
-                return new Gson().fromJson(str, QuestionAnswerImage.class);
+                return new Gson().fromJson(str, AnswerOption.class);
             }
 
             public int getId() {
@@ -281,12 +265,20 @@ public class GetQuestionWithLevelid implements Parcelable {
                 this.id = id;
             }
 
-            public String getImage() {
-                return image;
+            public String getOption_text() {
+                return option_text;
             }
 
-            public void setImage(String image) {
-                this.image = image;
+            public void setOption_text(String option_text) {
+                this.option_text = option_text;
+            }
+
+            public String getIs_image() {
+                return is_image;
+            }
+
+            public void setIs_image(String is_image) {
+                this.is_image = is_image;
             }
 
             public String getCreated_at() {
@@ -315,9 +307,9 @@ public class GetQuestionWithLevelid implements Parcelable {
 
             public static class Pivot {
                 private int fis8_question_id;
-                private int fis8_image_id;
+                private int fis8_answer_option_id;
                 private int id;
-                private String is_correct_answer;
+                private String option;
                 private String created_at;
                 private String updated_at;
 
@@ -334,12 +326,12 @@ public class GetQuestionWithLevelid implements Parcelable {
                     this.fis8_question_id = fis8_question_id;
                 }
 
-                public int getFis8_image_id() {
-                    return fis8_image_id;
+                public int getFis8_answer_option_id() {
+                    return fis8_answer_option_id;
                 }
 
-                public void setFis8_image_id(int fis8_image_id) {
-                    this.fis8_image_id = fis8_image_id;
+                public void setFis8_answer_option_id(int fis8_answer_option_id) {
+                    this.fis8_answer_option_id = fis8_answer_option_id;
                 }
 
                 public int getId() {
@@ -350,12 +342,12 @@ public class GetQuestionWithLevelid implements Parcelable {
                     this.id = id;
                 }
 
-                public String getIs_correct_answer() {
-                    return is_correct_answer;
+                public String getOption() {
+                    return option;
                 }
 
-                public void setIs_correct_answer(String is_correct_answer) {
-                    this.is_correct_answer = is_correct_answer;
+                public void setOption(String option) {
+                    this.option = option;
                 }
 
                 public String getCreated_at() {
@@ -376,122 +368,7 @@ public class GetQuestionWithLevelid implements Parcelable {
             }
         }
 
-        public static class AnswerOptionText {
-            private int id;
-            private String answer_option_text;
-            private String created_at;
-            private String updated_at;
-            private Pivot pivot;
-
-            public static AnswerOptionText objectFromData(String str) {
-
-                return new Gson().fromJson(str, AnswerOptionText.class);
-            }
-
-            public int getId() {
-                return id;
-            }
-
-            public void setId(int id) {
-                this.id = id;
-            }
-
-            public String getAnswer_option_text() {
-                return answer_option_text;
-            }
-
-            public void setAnswer_option_text(String answer_option_text) {
-                this.answer_option_text = answer_option_text;
-            }
-
-            public String getCreated_at() {
-                return created_at;
-            }
-
-            public void setCreated_at(String created_at) {
-                this.created_at = created_at;
-            }
-
-            public String getUpdated_at() {
-                return updated_at;
-            }
-
-            public void setUpdated_at(String updated_at) {
-                this.updated_at = updated_at;
-            }
-
-            public Pivot getPivot() {
-                return pivot;
-            }
-
-            public void setPivot(Pivot pivot) {
-                this.pivot = pivot;
-            }
-
-            public static class Pivot {
-                private int fis8_question_id;
-                private int fis8_answer_option_text_id;
-                private int id;
-                private String is_correct_answer;
-                private String created_at;
-                private String updated_at;
-
-                public static Pivot objectFromData(String str) {
-
-                    return new Gson().fromJson(str, Pivot.class);
-                }
-
-                public int getFis8_question_id() {
-                    return fis8_question_id;
-                }
-
-                public void setFis8_question_id(int fis8_question_id) {
-                    this.fis8_question_id = fis8_question_id;
-                }
-
-                public int getFis8_answer_option_text_id() {
-                    return fis8_answer_option_text_id;
-                }
-
-                public void setFis8_answer_option_text_id(int fis8_answer_option_text_id) {
-                    this.fis8_answer_option_text_id = fis8_answer_option_text_id;
-                }
-
-                public int getId() {
-                    return id;
-                }
-
-                public void setId(int id) {
-                    this.id = id;
-                }
-
-                public String getIs_correct_answer() {
-                    return is_correct_answer;
-                }
-
-                public void setIs_correct_answer(String is_correct_answer) {
-                    this.is_correct_answer = is_correct_answer;
-                }
-
-                public String getCreated_at() {
-                    return created_at;
-                }
-
-                public void setCreated_at(String created_at) {
-                    this.created_at = created_at;
-                }
-
-                public String getUpdated_at() {
-                    return updated_at;
-                }
-
-                public void setUpdated_at(String updated_at) {
-                    this.updated_at = updated_at;
-                }
-            }
-        }
-
-        public static class History {
+        public static class QuizHistories {
             private int id;
             private int student_id;
             private int time_taken;
@@ -499,9 +376,9 @@ public class GetQuestionWithLevelid implements Parcelable {
             private String created_at;
             private Pivot pivot;
 
-            public static History objectFromData(String str) {
+            public static QuizHistories objectFromData(String str) {
 
-                return new Gson().fromJson(str, History.class);
+                return new Gson().fromJson(str, QuizHistories.class);
             }
 
             public int getId() {
@@ -554,7 +431,7 @@ public class GetQuestionWithLevelid implements Parcelable {
 
             public static class Pivot {
                 private int fis8_question_id;
-                private int fis8_history_id;
+                private int fis8_quiz_history_id;
                 private int id;
                 private String user_answer;
                 private String created_at;
@@ -572,12 +449,12 @@ public class GetQuestionWithLevelid implements Parcelable {
                     this.fis8_question_id = fis8_question_id;
                 }
 
-                public int getFis8_history_id() {
-                    return fis8_history_id;
+                public int getFis8_quiz_history_id() {
+                    return fis8_quiz_history_id;
                 }
 
-                public void setFis8_history_id(int fis8_history_id) {
-                    this.fis8_history_id = fis8_history_id;
+                public void setFis8_quiz_history_id(int fis8_quiz_history_id) {
+                    this.fis8_quiz_history_id = fis8_quiz_history_id;
                 }
 
                 public int getId() {
@@ -602,112 +479,6 @@ public class GetQuestionWithLevelid implements Parcelable {
 
                 public void setCreated_at(String created_at) {
                     this.created_at = created_at;
-                }
-            }
-        }
-
-        public static class QuestionImage {
-            private int id;
-            private String image;
-            private String created_at;
-            private String updated_at;
-            private Pivot pivot;
-
-            public static QuestionImage objectFromData(String str) {
-
-                return new Gson().fromJson(str, QuestionImage.class);
-            }
-
-            public int getId() {
-                return id;
-            }
-
-            public void setId(int id) {
-                this.id = id;
-            }
-
-            public String getImage() {
-                return image;
-            }
-
-            public void setImage(String image) {
-                this.image = image;
-            }
-
-            public String getCreated_at() {
-                return created_at;
-            }
-
-            public void setCreated_at(String created_at) {
-                this.created_at = created_at;
-            }
-
-            public String getUpdated_at() {
-                return updated_at;
-            }
-
-            public void setUpdated_at(String updated_at) {
-                this.updated_at = updated_at;
-            }
-
-            public Pivot getPivot() {
-                return pivot;
-            }
-
-            public void setPivot(Pivot pivot) {
-                this.pivot = pivot;
-            }
-
-            public static class Pivot {
-                private int fis8_question_id;
-                private int fis8_image_id;
-                private int id;
-                private String created_at;
-                private String updated_at;
-
-                public static Pivot objectFromData(String str) {
-
-                    return new Gson().fromJson(str, Pivot.class);
-                }
-
-                public int getFis8_question_id() {
-                    return fis8_question_id;
-                }
-
-                public void setFis8_question_id(int fis8_question_id) {
-                    this.fis8_question_id = fis8_question_id;
-                }
-
-                public int getFis8_image_id() {
-                    return fis8_image_id;
-                }
-
-                public void setFis8_image_id(int fis8_image_id) {
-                    this.fis8_image_id = fis8_image_id;
-                }
-
-                public int getId() {
-                    return id;
-                }
-
-                public void setId(int id) {
-                    this.id = id;
-                }
-
-                public String getCreated_at() {
-                    return created_at;
-                }
-
-                public void setCreated_at(String created_at) {
-                    this.created_at = created_at;
-                }
-
-                public String getUpdated_at() {
-                    return updated_at;
-                }
-
-                public void setUpdated_at(String updated_at) {
-                    this.updated_at = updated_at;
                 }
             }
         }

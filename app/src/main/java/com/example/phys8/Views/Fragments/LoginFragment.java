@@ -96,18 +96,23 @@ public class LoginFragment extends Fragment {
 
         helper = SharedPreferenceHelper.getInstance(requireActivity());
 
-        initial(view);
+        if(helper.getUserId()!=""){
+            Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_berandaFragment);
+        }else{
 
-        setActivationButton(false);
+            initial(view);
 
-        userViewModel.getUsers();
-        userViewModel.getResultUsers().observe(getActivity(), showResultUser);
+            setActivationButton(false);
+
+            userViewModel.getUsers();
+            userViewModel.getResultUsers().observe(getActivity(), showResultUser);
             txt_register_LoginFragment.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_registerFragment);
                 }
             });
+        }
     }
 
     private Observer<List<User.Result>> showResultUser = new Observer<List<User.Result>>() {
@@ -211,20 +216,6 @@ public class LoginFragment extends Fragment {
         objEmailLogin = til_email_LoginFragment.getEditText().getText().toString().trim();
         objPassLogin = til_password_LoginFragment.getEditText().getText().toString().trim();
 
-        if (objEmailLogin.length() > 0) {
-            for (int i = 0; i < user.size(); i++) {
-                if (user.get(i).getEmail().equals(objEmailLogin)) {
-                    til_email_LoginFragment.setError("");
-                    setActivationButton(true);
-                    break;
-                } else if (user.get(i).getEmail() != objEmailLogin && i == user.size() - 1) {
-                    til_email_LoginFragment.setError("Akun tidak tersedia");
-                    setActivationButton(false);
-                }else {
-                    setActivationButton(false);
-                }
-            }
-        }
         if (objEmailLogin.length() == 0) {
             til_email_LoginFragment.setError("Email tidak boleh kosong");
             setActivationButton(false);
@@ -233,6 +224,22 @@ public class LoginFragment extends Fragment {
             setActivationButton(false);
         }else{
             til_password_LoginFragment.setError("");
+        }
+
+        if (objEmailLogin.length() > 0) {
+            for (int i = 0; i < user.size(); i++) {
+                if (user.get(i).getEmail().equals(objEmailLogin)) {
+                    til_email_LoginFragment.setError("");
+                    setActivationButton(true);
+                    break;
+                } else if (user.get(i).getEmail() != objEmailLogin && i == user.size() - 1) {
+                    til_email_LoginFragment.setError("Akun belum terdaftar");
+                    setActivationButton(false);
+                }else {
+
+                    setActivationButton(false);
+                }
+            }
         }
     }
 
