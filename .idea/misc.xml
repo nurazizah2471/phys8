@@ -13,9 +13,12 @@
         <entry key="..\:/phys8/app/src/main/res/drawable/ic_vector_logo.xml" value="0.225" />
         <entry key="..\:/phys8/app/src/main/res/drawable/progressdialogshape.xml" value="0.225" />
         <entry key="..\:/phys8/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/phys8/app/src/main/res/layout/card_ikon_benar_salah_kuis.xml" value="0.2942708333333333" />
+        <entry key="..\:/phys8/app/src/main/res/layout/card_level_game.xml" value="0.2754782700075322" />
         <entry key="..\:/phys8/app/src/main/res/layout/fragment_beranda.xml" value="0.2086956590966153" />
         <entry key="..\:/phys8/app/src/main/res/layout/fragment_login.xml" value="0.27340823970037453" />
         <entry key="..\:/phys8/app/src/main/res/layout/fragment_permainan.xml" value="0.2086956590966153" />
+        <entry key="..\:/phys8/app/src/main/res/layout/fragment_pilih_level.xml" value="0.2942708333333333" />
         <entry key="..\:/phys8/app/src/main/res/layout/fragment_profil.xml" value="0.18958333333333333" />
         <entry key="..\:/phys8/app/src/main/res/layout/fragment_register.xml" value="0.18958333333333333" />
         <entry key="..\:/phys8/app/src/main/res/menu/main_menu.xml" value="0.1" />
