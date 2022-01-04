@@ -28,6 +28,10 @@ public class SharedPreferenceHelper {
         userId.edit().putString(USERID, userIdobj).apply();
     }
 
+    public static void saveUserId(String userIdobj){
+        userId.edit().putString(USERID, userIdobj).apply();
+    }
+
     public void saveRefreshToken(String token){
         prefs.edit().putString(PREFS, token).apply();
     }

@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+
 import com.example.phys8.Helpers.SharedPreferenceHelper;
 import com.example.phys8.R;
 
@@ -80,6 +81,8 @@ public class BerandaFragment extends Fragment {
 
         inisialisasi();
 
+        helper = SharedPreferenceHelper.getInstance(requireActivity());
+        helper.saveAccessToken(tokenResponse.getResult().getAuthorization(), tokenResponse.getUserId());
         btnPlayGame_berandaFragment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
