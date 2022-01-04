@@ -57,41 +57,49 @@ public class QuizHistoryRepository {
     public MutableLiveData<QuizHistory.Result> addQuizHistory(String student_id){
         final MutableLiveData<QuizHistory.Result> listAddHistory = new MutableLiveData<>();
 
-        apiService.addQuizHistory(student_id).enqueue(new Callback<QuizHistory.Result>() {
+        apiService.addQuizHistory(student_id).enqueue(new Callback<QuizHistory>() {
             @Override
-            public void onResponse(Call<QuizHistory.Result> call, Response<QuizHistory.Result> response) {
+            public void onResponse(Call<QuizHistory> call, Response<QuizHistory> response) {
                 if (response.isSuccessful()){
 
-                    listAddHistory.postValue(response.body());
+                    listAddHistory.postValue(response.body().getResult().get(0));
                 }
             }
 
             @Override
-            public void onFailure(Call<QuizHistory.Result> call, Throwable t) {
+            public void onFailure(Call<QuizHistory> call, Throwable t) {
             }
         });
 
         return listAddHistory;
     }
 
-    public MutableLiveData<QuizHistory.Result> addUserAnswer(String quiz_history_id, String question_id, String user_answer){
-        final MutableLiveData<QuizHistory.Result> listAddUserAnswer = new MutableLiveData<>();
-        System.out.println("masuk sebelum repo");
-        apiService.addUserAnswer(quiz_history_id, question_id, user_answer).enqueue(new Callback<QuizHistory.Result>() {
-            @Override
-            public void onResponse(Call<QuizHistory.Result> call, Response<QuizHistory.Result> response) {
-                if (response.isSuccessful()){
+    public LiveData<String> addUserAnswer(String quiz_history_id, String question_id, String user_answer) {
+        MutableLiveData<String> message = new MutableLiveData<>();
 
-                    listAddUserAnswer.postValue(response.body());
-                    System.out.println("masuk setelah proses repo");
+        apiService.addUserAnswer(quiz_history_id, question_id, user_answer) .enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+
+                if (response.isSuccessful()){
+                    if (response.body() != null){
+                        try {
+                            JSONObject object = new JSONObject(new Gson().toJson(response.body()));
+                            String msg = object.getString("message");
+                            message.postValue(msg);
+                        }catch (JSONException e){
+                            e.printStackTrace();
+                        }
+                    }
                 }
             }
 
             @Override
-            public void onFailure(Call<QuizHistory.Result> call, Throwable t) {
+            public void onFailure(Call<JsonObject> call, Throwable t) {
             }
         });
 
-        return listAddUserAnswer;
+        return message;
     }
+
 }

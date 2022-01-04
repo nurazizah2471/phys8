@@ -1,6 +1,7 @@
 package com.example.phys8.Retrofit;
 
 import com.example.phys8.Models.Categories;
+import com.example.phys8.Models.GetQuestionWithHistoryId;
 import com.example.phys8.Models.GetQuestionWithLevelid;
 import com.example.phys8.Models.Level;
 import com.example.phys8.Models.QuizHistory;
@@ -47,11 +48,14 @@ public interface ApiEndPoint {
 
     @POST("quiz_history")
     @FormUrlEncoded
-    Call<QuizHistory.Result> addQuizHistory(@Field("student_id") String student_id);
+    Call<QuizHistory> addQuizHistory(@Field("student_id") String student_id);
 
     @POST("user_answer")
     @FormUrlEncoded
-    Call<QuizHistory.Result> addUserAnswer(@Field("quiz_history_id") String quiz_history_id,
+    Call<JsonObject> addUserAnswer(@Field("quiz_history_id") String quiz_history_id,
                                    @Field("question_id") String question_id,
                                    @Field("user_answer") String user_answer);
+
+    @GET("quiz_history/{quizHistoryId}")
+    Call<GetQuestionWithHistoryId> getQuestionWithHistoryId(@Path("quizHistoryId") String quizHistoryId);
 }

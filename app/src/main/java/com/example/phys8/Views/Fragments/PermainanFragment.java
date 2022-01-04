@@ -6,7 +6,9 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,9 +19,11 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.phys8.Adapters.rvAdapter_ikonBenarSalahKuis;
 import com.example.phys8.Adapters.rvAdapter_pilgan;
 import com.example.phys8.Helpers.ItemClickSupport;
 import com.example.phys8.Helpers.SharedPreferenceHelper;
+import com.example.phys8.Models.GetQuestionWithHistoryId;
 import com.example.phys8.Models.GetQuestionWithLevelid;
 import com.example.phys8.Models.QuizHistory;
 import com.example.phys8.R;
@@ -100,9 +104,9 @@ public class PermainanFragment extends Fragment {
     private View myv;
     private QuizHistoryViewModel quizHistoryViewModel;
 
-    private int score, positionChoosenPilgan;
+    private int score, positionChoosenPilgan, questionSize;
     private boolean answered;
-   // private rvAdapter_ikonBenarSalahKuis adapter_ikonBenarSalahKuis;
+    private rvAdapter_ikonBenarSalahKuis adapter_ikonBenarSalahKuis;
     private String levelId, quizHistoryId;
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -111,14 +115,21 @@ public class PermainanFragment extends Fragment {
         inisialisasi(view);
         myv = view;
 
-        addItemClickSupport();
-
         levelId=getArguments().getString("levelId");
         quizHistoryId=getArguments().getString("quizHistoryId");
+
+
+        addItemClickSupport();
+        getQuestionWithHistoryId(quizHistoryId);
 
         //permainanViewModel.init(helper.getAccessToken()); //unsend
         permainanViewModel.getQuestionWithLevelId(levelId);
         permainanViewModel.getResultQuestionWithLevelId().observe(getActivity(), showQuestion);
+    }
+
+    private void getQuestionWithHistoryId(String quizHistoryId) {
+        permainanViewModel.getQuestionWithHistoryId(quizHistoryId);
+        permainanViewModel.getResultQuestionWithHistoryId().observe(getActivity(), showResultQuestionWithHistoryId);
     }
 
     private void addItemClickSupport(){
@@ -128,12 +139,12 @@ public class PermainanFragment extends Fragment {
 
                 positionChoosenPilgan = position;
                 //quizHistoryViewModel.init(helper.getAccessToken()); unsend
-                System.out.println("quizhstry"+quizHistoryId);
                 quizHistoryViewModel.addUserAnswer(quizHistoryId, String.valueOf(questionList.get(questionCounter).getId()),
-                        questionList.get(questionCounter).getAnswer_option().get(position).getPivot().getOption());
-                quizHistoryViewModel.getResultAddUserAnswer().observe(getActivity(), showResultAddUserAnswer);
-
-                checkAnswer(position);
+                              questionList.get(questionCounter).getAnswer_option().get(position).getPivot().getOption()).observe(requireActivity(), s -> {
+                    if (!s.isEmpty()){
+                       checkAnswer(position);
+                    }
+                });
             }
         });
     }
@@ -149,6 +160,7 @@ public class PermainanFragment extends Fragment {
         }else{
             Toast.makeText(getActivity(),"Jawaban Salah! Jawaban Benar: "+questionList.get(questionCounter).getCorrect_answer_option()+" Akumulasi skor: "+score, Toast.LENGTH_SHORT).show();
         }
+        getQuestionWithHistoryId(quizHistoryId);
         showSolution();
         showNextQuestion();
     }
@@ -159,15 +171,13 @@ public class PermainanFragment extends Fragment {
             questionList = results;
             questionCountTotal = questionList.size();
             showNextQuestion();
-
-            // setRv_IkonBenarSalah(results);
         }
     };
 
-    private Observer<QuizHistory.Result> showResultAddUserAnswer = new Observer<QuizHistory.Result>() {
+    private Observer<List<GetQuestionWithHistoryId.Result>> showResultQuestionWithHistoryId = new Observer<List<GetQuestionWithHistoryId.Result>>() {
         @Override
-        public void onChanged(QuizHistory.Result results) {
-
+        public void onChanged(List<GetQuestionWithHistoryId.Result> results) {
+            setRv_IkonBenarSalah(results.get(0).getQuestion(), results.get(0));
         }
     };
 
@@ -228,12 +238,17 @@ public class PermainanFragment extends Fragment {
         Toast.makeText(getActivity(),"Permainan berakhir. Akumulasi skor: "+score, Toast.LENGTH_SHORT).show();
     }
 
-  //  private void setRv_IkonBenarSalah(List<GetQuestionWithLevelid.Result> questions){
-    //    rv_IkonBenarSalah_FragmentPermainan.setLayoutManager(new GridLayoutManager(getContext(), questions.size()));
-      //  adapter_ikonBenarSalahKuis = new rvAdapter_ikonBenarSalahKuis(getActivity());
-       // adapter_ikonBenarSalahKuis.setListQuestionUserAdapter(questions, help);
-        //rv_IkonBenarSalah_FragmentPermainan.setAdapter(adapter_ikonBenarSalahKuis);
-    //}
+    private void setRv_IkonBenarSalah(List<GetQuestionWithHistoryId.Result.Question> questions, GetQuestionWithHistoryId.Result objResult){
+        if(questions.size()==0){
+            questionSize = 10;
+        }else{
+            questionSize = questions.size();
+        }
+        rv_IkonBenarSalah_FragmentPermainan.setLayoutManager(new GridLayoutManager(getContext(), questionSize));
+        adapter_ikonBenarSalahKuis = new rvAdapter_ikonBenarSalahKuis(getActivity(), objResult);
+        adapter_ikonBenarSalahKuis.setListQuestionUserAdapter(questions, helper.getUserId());
+        rv_IkonBenarSalah_FragmentPermainan.setAdapter(adapter_ikonBenarSalahKuis);
+    }
     private void setRv_pilgan(List<GetQuestionWithLevelid.Result.AnswerOption> answerOptionsList){
           rv_PilihanGanda_FragmentPermainan.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
           AdapterPilgan = new rvAdapter_pilgan(getActivity());
@@ -242,7 +257,7 @@ public class PermainanFragment extends Fragment {
     }
 
     private void inisialisasi(View view) {
-      //  rv_IkonBenarSalah_FragmentPermainan = view.findViewById(R.id.rv_IkonBenarSalah_FragmentPermainan);
+        rv_IkonBenarSalah_FragmentPermainan = view.findViewById(R.id.rv_IkonBenarSalah_FragmentPermainan);
         timer_permainanFragment = view.findViewById(R.id.timer_permainanFragment);
         rv_PilihanGanda_FragmentPermainan = view.findViewById(R.id.rv_PilihanGanda_FragmentPermainan);
         soal_FragmentPermainan = view.findViewById(R.id.soal_FragmentPermainan);

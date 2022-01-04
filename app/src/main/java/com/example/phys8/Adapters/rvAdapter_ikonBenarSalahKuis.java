@@ -8,6 +8,7 @@ import android.widget.ImageView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.phys8.Models.GetQuestionWithHistoryId;
 import com.example.phys8.Models.GetQuestionWithLevelid;
 import com.example.phys8.R;
 
@@ -16,25 +17,26 @@ import java.util.List;
 
 public class rvAdapter_ikonBenarSalahKuis extends RecyclerView.Adapter<rvAdapter_ikonBenarSalahKuis.ikonBenarSalahKuisHolder>{
     private Context context;
-    private int idUser;
+    private String idUser;
     boolean isStarted;
-    private List<GetQuestionWithLevelid.Result> listQuestion; //sudah disesuaikan dengan level yang diinginkan
+    private GetQuestionWithHistoryId.Result objResult; //sudah disesuaikan dengan level yang diinginkan
+    private List<GetQuestionWithHistoryId.Result.Question> listQuestion; //sudah disesuaikan dengan level yang diinginkan
 
-    public void setListQuestionUserAdapter(List<GetQuestionWithLevelid.Result> listQuestion, int idUser) {
+    public void setListQuestionUserAdapter(List<GetQuestionWithHistoryId.Result.Question> listQuestion, String idUser) {
         this.listQuestion = listQuestion;
         this.idUser = idUser;
     }
 
-    public rvAdapter_ikonBenarSalahKuis(Context context) {
+    public rvAdapter_ikonBenarSalahKuis(Context context, GetQuestionWithHistoryId.Result objResult) {
         this.context = context;
-        this.listQuestion=new ArrayList<>();
+        this.objResult=objResult;
     }
 
-    public List<GetQuestionWithLevelid.Result> getListQuestion(){
+    public List<GetQuestionWithHistoryId.Result.Question> getListQuestion(){
         return listQuestion;
     }
 
-    public int getIdUser(){
+    public String getIdUser(){
         return idUser;
     }
 
@@ -46,42 +48,25 @@ public class rvAdapter_ikonBenarSalahKuis extends RecyclerView.Adapter<rvAdapter
 
     @Override
     public void onBindViewHolder(rvAdapter_ikonBenarSalahKuis.ikonBenarSalahKuisHolder holder, int position) {
-        holder.ikon_benar_salah_kuis.setImageResource(R.drawable.ic_belumjawabkuis);
 
-
-                //untukpembahsan
-       // String correctAnswer;
-
-        //if(!resultListQuestion.getHistory().isEmpty()) {
-         //   final List<Question.Result.History> resultListHistoryFromQuestion = resultListQuestion.getHistory();
-          //  for (int i = 0; i < resultListHistoryFromQuestion.size(); i++) {
-            //    if (resultListHistoryFromQuestion.get(i).getStudent_id() == getIdUser()) {
-              //      final Question.Result.History.Pivot resultPivotHistoryWithQuestion = resultListHistoryFromQuestion.get(i).getPivot();
-
-                //    if(!resultPivotHistoryWithQuestion.getUser_answer().isEmpty()){
-                  //      if(!resultListQuestion.getAnswer_option_text().isEmpty()){
-                    //        for(int j=0;j<resultListQuestion.getAnswer_option_text().size();j++){
-                      //          if(resultListQuestion.getAnswer_option_text().get(j).getPivot().getIs_correct_answer().equals("1")){
-                        //            correctAnswer = resultListQuestion.getAnswer_option_text().get(j).getAnswer_option_text();
-                          //      }
-                            //}
-                        //}
-                        //if(resultListQuestion.getIs_image_answer().toString().equals("1")){
-                            //for(int j=0;j<resultListQuestion.getQuestion_answer_image().size();j++){
-                          //      if(resultListQuestion.getQuestion_answer_image().get(j).getPivot().getIs_correct_answer().equals("1")){
-                        //           correctAnswer = resultListQuestion.getQuestion_answer_image().get(j).getImage();
-                      //          }
-                    //        }
-                  //      }
-                //    }else{
-              //          holder.
-            //        }
-
-
-          //      }
-        //    }
-
-      //  }
+        if(getListQuestion().get(position)!=null){
+            if(getListQuestion().get(position).getPivot().getUser_answer().isEmpty()){
+                //jika user belum jawab kuis
+                holder.ikon_benar_salah_kuis.setImageResource(R.drawable.ic_belumjawabkuis);
+            }else{
+                if (getListQuestion().get(position).getCorrect_answer_option().equalsIgnoreCase(getListQuestion().get(position).getPivot().getUser_answer())){
+                    //jika jawaban user benar
+                    holder.ikon_benar_salah_kuis.setImageResource(R.drawable.bg_btn_red_active);
+                }
+                else{
+                    //jika user salah jawab kuis
+                    holder.ikon_benar_salah_kuis.setImageResource(R.drawable.bg_btn_nonactive);
+                }
+            }
+        }else{
+            //jika user belum jawab kuis
+            holder.ikon_benar_salah_kuis.setImageResource(R.drawable.ic_belumjawabkuis);
+        }
     }
 
     @Override

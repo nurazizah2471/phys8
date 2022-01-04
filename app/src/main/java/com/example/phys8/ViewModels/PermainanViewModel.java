@@ -8,6 +8,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.phys8.Models.GetQuestionWithHistoryId;
 import com.example.phys8.Models.GetQuestionWithLevelid;
 import com.example.phys8.Models.Level;
 import com.example.phys8.Repositories.AuthRepository;
@@ -45,7 +46,11 @@ public class PermainanViewModel extends AndroidViewModel {
     }
     public LiveData<List<Level.Result>> getResultAllLevel(){return resultAllLevel;}
 
-
+    private MutableLiveData<List<GetQuestionWithHistoryId.Result>> resultQuestionWithHistoryId = new MutableLiveData<>();
+    public void getQuestionWithHistoryId(String quizHistoryId){
+        resultQuestionWithHistoryId = permainanRepository.getQuestionWithHistoryId(quizHistoryId);
+    }
+    public LiveData<List<GetQuestionWithHistoryId.Result>> getResultQuestionWithHistoryId(){return resultQuestionWithHistoryId;}
     @Override
     protected void onCleared() {
         super.onCleared();

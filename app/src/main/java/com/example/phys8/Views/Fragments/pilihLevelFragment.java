@@ -143,7 +143,6 @@ public class pilihLevelFragment extends Fragment {
     private Observer<QuizHistory.Result> showResultAddQuizHistory = new Observer<QuizHistory.Result>() {
         @Override
         public void onChanged(QuizHistory.Result results) {
-           System.out.println("Hi"+results);
             if(results!=null){
                 bundle=new Bundle();
                 bundle.putString("levelId", ""+ bundleLevelId);

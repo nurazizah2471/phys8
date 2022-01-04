@@ -2,6 +2,7 @@ package com.example.phys8.Retrofit;
 
 import com.example.phys8.Helpers.Const;
 import com.example.phys8.Models.Categories;
+import com.example.phys8.Models.GetQuestionWithHistoryId;
 import com.example.phys8.Models.GetQuestionWithLevelid;
 import com.example.phys8.Models.Level;
 import com.example.phys8.Models.QuizHistory;
@@ -17,6 +18,7 @@ import okhttp3.Request;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.Path;
 
 public class ApiService {
 
@@ -82,9 +84,11 @@ public class ApiService {
     public Call<User> getUsers(){ return api.getUsers(); }
     public Call<GetQuestionWithLevelid> getQuestionWithLevelId(String levelId) {return api.getQuestionWithLevelId(levelId);}
     public Call<Level> getAllLevel(){ return api.getAllLevel(); }
-    public Call<QuizHistory.Result> addQuizHistory(String student_id){ return api.addQuizHistory(student_id); }
-    public Call<QuizHistory.Result> addUserAnswer(String quiz_history_id, String question_id, String user_answer){
-        return api.addUserAnswer(quiz_history_id, question_id, user_answer);
-    }
+    public Call<QuizHistory> addQuizHistory(String student_id){ return api.addQuizHistory(student_id); }
+   // public Call<QuizHistory.Result> addUserAnswer(String quiz_history_id, String question_id, String user_answer){
+     //   return api.addUserAnswer(quiz_history_id, question_id, user_answer);
+    //}
+   public Call<JsonObject> addUserAnswer(String quiz_history_id, String question_id, String user_answer) {return api.addUserAnswer(quiz_history_id, question_id, user_answer);}
+    public Call<GetQuestionWithHistoryId> getQuestionWithHistoryId(String quizHistoryId) {return api.getQuestionWithHistoryId(quizHistoryId);}
 
 }
