@@ -48,4 +48,10 @@ public interface ApiEndPoint {
     @POST("quiz_history")
     @FormUrlEncoded
     Call<QuizHistory.Result> addQuizHistory(@Field("student_id") String student_id);
+
+    @POST("user_answer")
+    @FormUrlEncoded
+    Call<QuizHistory.Result> addUserAnswer(@Field("quiz_history_id") String quiz_history_id,
+                                   @Field("question_id") String question_id,
+                                   @Field("user_answer") String user_answer);
 }

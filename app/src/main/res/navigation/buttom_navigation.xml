@@ -60,9 +60,7 @@
             app:argType="string" />
         <action
             android:id="@+id/action_permainanFragment_to_pilihLevelFragment"
-            app:destination="@id/pilihLevelFragment"
-            app:popUpTo="@id/pilihLevelFragment"
-            app:popUpToInclusive="true"/>
+            app:destination="@id/pilihLevelFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -82,6 +80,7 @@
         tools:layout="@layout/fragment_pilih_level" >
         <action
             android:id="@+id/action_pilihLevelFragment_to_permainanFragment"
-            app:destination="@id/permainanFragment" />
+            app:destination="@id/permainanFragment"
+            />
     </fragment>
 </navigation>

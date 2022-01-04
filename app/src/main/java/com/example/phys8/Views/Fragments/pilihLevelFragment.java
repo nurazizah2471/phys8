@@ -102,6 +102,7 @@ public class pilihLevelFragment extends Fragment {
         addItemClickSupport();
 
 
+        keteranganLevel_levelFragment.setText("Sedang menapilkan level...");
         permainanViewModel.init(helper.getAccessToken());
         permainanViewModel.getAllLevel();
         permainanViewModel.getResultAllLevel().observe(getActivity(), showResultLevel);
@@ -127,6 +128,7 @@ public class pilihLevelFragment extends Fragment {
             rv_level_pilihLevelFragment.setAdapter(adapter_level);
         }else{
             keteranganLevel_levelFragment.setVisibility(View.VISIBLE);
+            keteranganLevel_levelFragment.setText("Level belum tersedia");
             rv_level_pilihLevelFragment.setVisibility(View.GONE);
         }
     }

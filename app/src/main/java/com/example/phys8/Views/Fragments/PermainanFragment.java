@@ -21,8 +21,10 @@ import com.example.phys8.Adapters.rvAdapter_pilgan;
 import com.example.phys8.Helpers.ItemClickSupport;
 import com.example.phys8.Helpers.SharedPreferenceHelper;
 import com.example.phys8.Models.GetQuestionWithLevelid;
+import com.example.phys8.Models.QuizHistory;
 import com.example.phys8.R;
 import com.example.phys8.ViewModels.PermainanViewModel;
+import com.example.phys8.ViewModels.QuizHistoryViewModel;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.List;
@@ -96,8 +98,9 @@ public class PermainanFragment extends Fragment {
     private CountDownTimer countDownTimer;
     private long timeLeftInMillis;
     private View myv;
+    private QuizHistoryViewModel quizHistoryViewModel;
 
-    private int score;
+    private int score, positionChoosenPilgan;
     private boolean answered;
    // private rvAdapter_ikonBenarSalahKuis adapter_ikonBenarSalahKuis;
     private String levelId, quizHistoryId;
@@ -123,6 +126,12 @@ public class PermainanFragment extends Fragment {
             @Override
             public void onItemClicked(RecyclerView recyclerView, int position, View v) {
 
+                positionChoosenPilgan = position;
+                quizHistoryViewModel.init(helper.getAccessToken());
+                System.out.println("quizhstry"+quizHistoryId);
+                quizHistoryViewModel.addUserAnswer(quizHistoryId, String.valueOf(questionList.get(questionCounter).getId()),
+                        questionList.get(questionCounter).getAnswer_option().get(position).getPivot().getOption());
+                quizHistoryViewModel.getResultAddUserAnswer().observe(getActivity(), showResultAddUserAnswer);
 
                 checkAnswer(position);
             }
@@ -136,9 +145,11 @@ public class PermainanFragment extends Fragment {
 
         if(questionList.get(questionCounter).getAnswer_option().get(position).getPivot().getOption().equalsIgnoreCase(questionList.get(questionCounter).getCorrect_answer_option())){
             score++;
-            Toast.makeText(getActivity(), String.valueOf(score), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(),"Jawaban Benar! Akumulasi skor: "+score, Toast.LENGTH_SHORT).show();
+        }else{
+            Toast.makeText(getActivity(),"Jawaban Salah! Jawaban Benar: "+questionList.get(questionCounter).getCorrect_answer_option()+" Akumulasi skor: "+score, Toast.LENGTH_SHORT).show();
         }
-        showSolution(position);
+        showSolution();
         showNextQuestion();
     }
 
@@ -150,6 +161,13 @@ public class PermainanFragment extends Fragment {
             showNextQuestion();
 
             // setRv_IkonBenarSalah(results);
+        }
+    };
+
+    private Observer<QuizHistory.Result> showResultAddUserAnswer = new Observer<QuizHistory.Result>() {
+        @Override
+        public void onChanged(QuizHistory.Result results) {
+
         }
     };
 
@@ -198,7 +216,7 @@ public class PermainanFragment extends Fragment {
         timer_permainanFragment.setText(timeFormatted);
 
         if(timeLeftInMillis<10000){
-            timer_permainanFragment.setTextColor(getResources().getColor(R.color.red));
+            timer_permainanFragment.setTextColor(getResources().getColor(R.color.white));
         } else{
             timer_permainanFragment.setTextColor(getResources().getColor(R.color.black));
         }
@@ -207,7 +225,7 @@ public class PermainanFragment extends Fragment {
     private void finishQuiz() {
         //sethighscore
         Navigation.findNavController(myv).navigate(R.id.action_permainanFragment_to_pilihLevelFragment);
-        Toast.makeText(getActivity(), String.valueOf(score), Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(),"Permainan berakhir. Akumulasi skor: "+score, Toast.LENGTH_SHORT).show();
     }
 
   //  private void setRv_IkonBenarSalah(List<GetQuestionWithLevelid.Result> questions){
@@ -231,9 +249,10 @@ public class PermainanFragment extends Fragment {
         teksInput_FragmentPermainan = view.findViewById(R.id.teksInput_FragmentPermainan);
 
         permainanViewModel=new ViewModelProvider(getActivity()).get(PermainanViewModel.class);
+        quizHistoryViewModel=new ViewModelProvider(getActivity()).get(QuizHistoryViewModel.class);
     }
 
-    private void showSolution(int position) {
+    private void showSolution() {
 
         questionCounter++;
       }

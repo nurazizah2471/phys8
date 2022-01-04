@@ -2,11 +2,17 @@ package com.example.phys8.Repositories;
 
 import android.util.Log;
 
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.phys8.Models.Categories;
 import com.example.phys8.Models.QuizHistory;
 import com.example.phys8.Retrofit.ApiService;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -53,5 +59,26 @@ public class QuizHistoryRepository {
         });
 
         return listAddHistory;
+    }
+
+    public MutableLiveData<QuizHistory.Result> addUserAnswer(String quiz_history_id, String question_id, String user_answer){
+        final MutableLiveData<QuizHistory.Result> listAddUserAnswer = new MutableLiveData<>();
+        System.out.println("masuk sebelum repo");
+        apiService.addUserAnswer(quiz_history_id, question_id, user_answer).enqueue(new Callback<QuizHistory.Result>() {
+            @Override
+            public void onResponse(Call<QuizHistory.Result> call, Response<QuizHistory.Result> response) {
+                if (response.isSuccessful()){
+
+                    listAddUserAnswer.postValue(response.body());
+                    System.out.println("masuk setelah proses repo");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<QuizHistory.Result> call, Throwable t) {
+            }
+        });
+
+        return listAddUserAnswer;
     }
 }

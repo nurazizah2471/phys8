@@ -36,6 +36,15 @@ public class QuizHistoryViewModel extends AndroidViewModel {
         return resultAddQuizHistory;
     }
 
+    private MutableLiveData<QuizHistory.Result> resultAddUserAnswer = new MutableLiveData<>();
+
+    public void addUserAnswer(String quiz_history_id, String question_id, String user_answer){
+        System.out.println("masuk viewmodel");
+        resultAddUserAnswer = quizHistoryRepository.addUserAnswer(quiz_history_id, question_id, user_answer);
+    }
+    public LiveData<QuizHistory.Result> getResultAddUserAnswer(){
+        return resultAddUserAnswer;
+    }
 
     @Override
     protected void onCleared() {
