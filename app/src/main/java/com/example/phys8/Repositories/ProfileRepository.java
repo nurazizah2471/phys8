@@ -20,19 +20,32 @@ public class ProfileRepository {
     private static ProfileRepository profileRepository;
     private ApiService apiService;
 
+//unsend
+  //  private ProfileRepository(String token){
 
-    private ProfileRepository(String token){
+    //    apiService = ApiService.getInstance(token);
+    //}
 
-        apiService = ApiService.getInstance(token);
-    }
+    //public static ProfileRepository getInstance(String token){
+      //  if (profileRepository == null){
+        //    profileRepository = new ProfileRepository(token);
+        //}
 
-    public static ProfileRepository getInstance(String token){
-        if (profileRepository == null){
-            profileRepository = new ProfileRepository(token);
+        //return profileRepository;
+    //}
+
+    //no
+    private ProfileRepository(){
+
+            apiService = ApiService.getInstance("");
+        }
+    public static ProfileRepository getInstance(){
+          if (profileRepository == null){
+            profileRepository = new ProfileRepository();
         }
 
         return profileRepository;
-    }
+        }
 
     public synchronized void resetInstance(){
         if (profileRepository != null){

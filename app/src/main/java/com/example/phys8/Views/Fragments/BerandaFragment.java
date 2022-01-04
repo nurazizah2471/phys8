@@ -82,7 +82,8 @@ public class BerandaFragment extends Fragment {
         inisialisasi();
 
         helper = SharedPreferenceHelper.getInstance(requireActivity());
-        helper.saveAccessToken(tokenResponse.getResult().getAuthorization(), tokenResponse.getUserId());
+        helper.saveUserId("1");
+        textView12.setText(helper.getUserId());
         btnPlayGame_berandaFragment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

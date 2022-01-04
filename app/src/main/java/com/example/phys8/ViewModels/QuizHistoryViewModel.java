@@ -20,12 +20,16 @@ public class QuizHistoryViewModel extends AndroidViewModel {
 
     public QuizHistoryViewModel(Application application) {
         super(application);
+
+        //no
+        quizHistoryRepository = QuizHistoryRepository.getInstance();
     }
 
-    public void init(String token){
+    //unsend
+    //public void init(String token){
 
-        quizHistoryRepository = QuizHistoryRepository.getInstance(token);
-    }
+      //  quizHistoryRepository = QuizHistoryRepository.getInstance(token);
+    //}
 
     private MutableLiveData<QuizHistory.Result> resultAddQuizHistory = new MutableLiveData<>();
 

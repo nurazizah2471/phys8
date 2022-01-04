@@ -18,16 +18,30 @@ public class PermainanRepository {
     private static PermainanRepository permainanRepository;
     private ApiService apiService;
 
-    private PermainanRepository(String token){
-        apiService = ApiService.getInstance(token);
-    }
+    //unsend
+   // private PermainanRepository(String token){
+     //   apiService = ApiService.getInstance(token);
+    //}
 
-    public static PermainanRepository getInstance(String token){
-        if (permainanRepository == null){
-            permainanRepository = new PermainanRepository(token);
+    //no
+    private PermainanRepository(){
+           apiService = ApiService.getInstance("");
         }
-        return permainanRepository;
-    }
+    //unsend
+   // public static PermainanRepository getInstance(String token){
+     //   if (permainanRepository == null){
+       //     permainanRepository = new PermainanRepository(token);
+        //}
+       // return permainanRepository;
+    //}
+
+    //no
+    public static PermainanRepository getInstance(){
+           if (permainanRepository == null){
+             permainanRepository = new PermainanRepository();
+        }
+         return permainanRepository;
+        }
 
     public synchronized void resetInstance(){
         if (permainanRepository != null){

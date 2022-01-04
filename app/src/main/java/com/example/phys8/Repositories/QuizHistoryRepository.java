@@ -22,16 +22,29 @@ public class QuizHistoryRepository {
     private static QuizHistoryRepository quizHistoryRepository;
     private ApiService apiService;
 
-    private QuizHistoryRepository(String token){
-        apiService = ApiService.getInstance(token);
-    }
+    //unsend
+   // private QuizHistoryRepository(String token){
+     //   apiService = ApiService.getInstance(token);
+    //}
 
-    public static QuizHistoryRepository getInstance(String token){
-        if (quizHistoryRepository == null){
-            quizHistoryRepository = new QuizHistoryRepository(token);
+    //unsend
+   // public static QuizHistoryRepository getInstance(String token){
+     //   if (quizHistoryRepository == null){
+       //     quizHistoryRepository = new QuizHistoryRepository(token);
+        //}
+        //return quizHistoryRepository;
+    //}
+
+    //no
+    private QuizHistoryRepository(){
+           apiService = ApiService.getInstance("");
+        }
+        public static QuizHistoryRepository getInstance(){
+           if (quizHistoryRepository == null){
+             quizHistoryRepository = new QuizHistoryRepository();
         }
         return quizHistoryRepository;
-    }
+        }
 
     public synchronized void resetInstance(){
         if (quizHistoryRepository != null){

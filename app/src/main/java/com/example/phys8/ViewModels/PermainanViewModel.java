@@ -10,6 +10,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.example.phys8.Models.GetQuestionWithLevelid;
 import com.example.phys8.Models.Level;
+import com.example.phys8.Repositories.AuthRepository;
 import com.example.phys8.Repositories.PermainanRepository;
 
 import java.util.List;
@@ -19,12 +20,16 @@ public class PermainanViewModel extends AndroidViewModel {
 
     public PermainanViewModel(Application application) {
         super(application);
+        //no
+        permainanRepository = permainanRepository.getInstance();
     }
 
-    public void init(String token){
+    //unsend
+    //public void init(String token){
 
-        permainanRepository = PermainanRepository.getInstance(token);
-    }
+     //   permainanRepository = PermainanRepository.getInstance(token);
+   // }
+
 
     //== Begin of view model to get question with level id
     private MutableLiveData<List<GetQuestionWithLevelid.Result>> resultQuestionWithLevelId = new MutableLiveData<>();

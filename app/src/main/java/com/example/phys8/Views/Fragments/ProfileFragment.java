@@ -117,6 +117,6 @@ public class ProfileFragment extends Fragment {
 
         helper = SharedPreferenceHelper.getInstance(requireActivity());
         profileViewModel = new ViewModelProvider(getActivity()).get(ProfileViewModel.class);
-        profileViewModel.init(helper.getAccessToken());
+        //profileViewModel.init(helper.getAccessToken()); unsend
     }
 }

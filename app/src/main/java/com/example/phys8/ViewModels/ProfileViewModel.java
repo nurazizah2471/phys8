@@ -15,11 +15,14 @@ public class ProfileViewModel extends AndroidViewModel {
 
     public ProfileViewModel(@NonNull Application application) {
         super(application);
+        //no
+        profileRepository = ProfileRepository.getInstance();
     }
 
-    public void init(String token){
-        profileRepository = ProfileRepository.getInstance(token);
-    }
+    //unsend
+    //public void init(String token){
+      //  profileRepository = ProfileRepository.getInstance(token);
+    //}
 
     public LiveData<String> logout(){
         profileRepository.resetInstance();

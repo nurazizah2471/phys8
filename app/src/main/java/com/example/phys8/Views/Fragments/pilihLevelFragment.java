@@ -103,7 +103,7 @@ public class pilihLevelFragment extends Fragment {
 
 
         keteranganLevel_levelFragment.setText("Sedang menapilkan level...");
-        permainanViewModel.init(helper.getAccessToken());
+        //permainanViewModel.init(helper.getAccessToken()); unsend
         permainanViewModel.getAllLevel();
         permainanViewModel.getResultAllLevel().observe(getActivity(), showResultLevel);
 
@@ -163,7 +163,7 @@ public class pilihLevelFragment extends Fragment {
 
                 bundleLevelId = adapter_level.getListLevel().get(position).getId();
 
-                quizHistoryViewModel.init(helper.getAccessToken());
+               // quizHistoryViewModel.init(helper.getAccessToken()); unsend
                 quizHistoryViewModel.addQuizHistory(helper.getUserId());
                 quizHistoryViewModel.getResultAddQuizHistory().observe(getActivity(), showResultAddQuizHistory);
             }

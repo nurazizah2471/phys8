@@ -116,7 +116,7 @@ public class PermainanFragment extends Fragment {
         levelId=getArguments().getString("levelId");
         quizHistoryId=getArguments().getString("quizHistoryId");
 
-        permainanViewModel.init(helper.getAccessToken());
+        //permainanViewModel.init(helper.getAccessToken()); //unsend
         permainanViewModel.getQuestionWithLevelId(levelId);
         permainanViewModel.getResultQuestionWithLevelId().observe(getActivity(), showQuestion);
     }
@@ -127,7 +127,7 @@ public class PermainanFragment extends Fragment {
             public void onItemClicked(RecyclerView recyclerView, int position, View v) {
 
                 positionChoosenPilgan = position;
-                quizHistoryViewModel.init(helper.getAccessToken());
+                //quizHistoryViewModel.init(helper.getAccessToken()); unsend
                 System.out.println("quizhstry"+quizHistoryId);
                 quizHistoryViewModel.addUserAnswer(quizHistoryId, String.valueOf(questionList.get(questionCounter).getId()),
                         questionList.get(questionCounter).getAnswer_option().get(position).getPivot().getOption());
