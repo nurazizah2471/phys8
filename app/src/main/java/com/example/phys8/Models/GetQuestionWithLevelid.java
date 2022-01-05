@@ -9,19 +9,9 @@ import java.util.List;
 
 public class GetQuestionWithLevelid implements Parcelable {
 
-
     private List<Result> result;
 
     protected GetQuestionWithLevelid(Parcel in) {
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
     }
 
     public static final Creator<GetQuestionWithLevelid> CREATOR = new Creator<GetQuestionWithLevelid>() {
@@ -47,6 +37,15 @@ public class GetQuestionWithLevelid implements Parcelable {
 
     public void setResult(List<Result> result) {
         this.result = result;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
     }
 
     public static class Result {
@@ -371,7 +370,8 @@ public class GetQuestionWithLevelid implements Parcelable {
         public static class QuizHistories {
             private int id;
             private int student_id;
-            private int quiz_score;
+            private int score;
+            private int money_reward;
             private int sum_correct_answer;
             private String created_at;
             private Pivot pivot;
@@ -397,12 +397,20 @@ public class GetQuestionWithLevelid implements Parcelable {
                 this.student_id = student_id;
             }
 
-            public int getQuiz_score() {
-                return quiz_score;
+            public int getScore() {
+                return score;
             }
 
-            public void setQuiz_score(int quiz_score) {
-                this.quiz_score = quiz_score;
+            public void setScore(int score) {
+                this.score = score;
+            }
+
+            public int getMoney_reward() {
+                return money_reward;
+            }
+
+            public void setMoney_reward(int money_reward) {
+                this.money_reward = money_reward;
             }
 
             public int getSum_correct_answer() {

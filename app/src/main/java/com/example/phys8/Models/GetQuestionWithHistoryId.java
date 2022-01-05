@@ -14,6 +14,15 @@ public class GetQuestionWithHistoryId implements Parcelable {
     protected GetQuestionWithHistoryId(Parcel in) {
     }
 
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
     public static final Creator<GetQuestionWithHistoryId> CREATOR = new Creator<GetQuestionWithHistoryId>() {
         @Override
         public GetQuestionWithHistoryId createFromParcel(Parcel in) {
@@ -39,20 +48,12 @@ public class GetQuestionWithHistoryId implements Parcelable {
         this.result = result;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-    }
-
     public static class Result {
         private int id;
         private int sum_correct_answer;
+        private Object score;
+        private int money_reward;
         private Student student;
-        private int quiz_score;
         private List<Question> question;
         private String created_at;
 
@@ -77,20 +78,28 @@ public class GetQuestionWithHistoryId implements Parcelable {
             this.sum_correct_answer = sum_correct_answer;
         }
 
+        public Object getScore() {
+            return score;
+        }
+
+        public void setScore(Object score) {
+            this.score = score;
+        }
+
+        public int getMoney_reward() {
+            return money_reward;
+        }
+
+        public void setMoney_reward(int money_reward) {
+            this.money_reward = money_reward;
+        }
+
         public Student getStudent() {
             return student;
         }
 
         public void setStudent(Student student) {
             this.student = student;
-        }
-
-        public int getQuiz_score() {
-            return quiz_score;
-        }
-
-        public void setQuiz_score(int quiz_score) {
-            this.quiz_score = quiz_score;
         }
 
         public List<Question> getQuestion() {

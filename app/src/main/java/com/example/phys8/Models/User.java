@@ -9,7 +9,6 @@ import java.util.List;
 
 public class User implements Parcelable {
 
-
     private List<Result> result;
 
     protected User(Parcel in) {
@@ -153,6 +152,7 @@ public class User implements Parcelable {
             private String is_admin;
             private int ticket;
             private int money;
+            private int quiz_score;
             private Object photo;
             private Object remember_token;
 
@@ -207,6 +207,14 @@ public class User implements Parcelable {
 
             public void setMoney(int money) {
                 this.money = money;
+            }
+
+            public int getQuiz_score() {
+                return quiz_score;
+            }
+
+            public void setQuiz_score(int quiz_score) {
+                this.quiz_score = quiz_score;
             }
 
             public Object getPhoto() {
