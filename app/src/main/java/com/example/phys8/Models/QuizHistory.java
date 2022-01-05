@@ -9,9 +9,19 @@ import java.util.List;
 
 public class QuizHistory implements Parcelable {
 
+
     private List<Result> result;
 
     protected QuizHistory(Parcel in) {
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
     public static final Creator<QuizHistory> CREATOR = new Creator<QuizHistory>() {
@@ -39,19 +49,11 @@ public class QuizHistory implements Parcelable {
         this.result = result;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-    }
-
     public static class Result {
         private int id;
         private int sum_correct_answer;
         private Student student;
+        private int quiz_score;
         private List<Question> question;
         private String created_at;
 
@@ -82,6 +84,14 @@ public class QuizHistory implements Parcelable {
 
         public void setStudent(Student student) {
             this.student = student;
+        }
+
+        public int getQuiz_score() {
+            return quiz_score;
+        }
+
+        public void setQuiz_score(int quiz_score) {
+            this.quiz_score = quiz_score;
         }
 
         public List<Question> getQuestion() {

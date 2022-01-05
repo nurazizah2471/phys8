@@ -15,6 +15,15 @@ public class GetQuestionWithLevelid implements Parcelable {
     protected GetQuestionWithLevelid(Parcel in) {
     }
 
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
     public static final Creator<GetQuestionWithLevelid> CREATOR = new Creator<GetQuestionWithLevelid>() {
         @Override
         public GetQuestionWithLevelid createFromParcel(Parcel in) {
@@ -38,15 +47,6 @@ public class GetQuestionWithLevelid implements Parcelable {
 
     public void setResult(List<Result> result) {
         this.result = result;
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
     }
 
     public static class Result {
@@ -371,7 +371,7 @@ public class GetQuestionWithLevelid implements Parcelable {
         public static class QuizHistories {
             private int id;
             private int student_id;
-            private int time_taken;
+            private int quiz_score;
             private int sum_correct_answer;
             private String created_at;
             private Pivot pivot;
@@ -397,12 +397,12 @@ public class GetQuestionWithLevelid implements Parcelable {
                 this.student_id = student_id;
             }
 
-            public int getTime_taken() {
-                return time_taken;
+            public int getQuiz_score() {
+                return quiz_score;
             }
 
-            public void setTime_taken(int time_taken) {
-                this.time_taken = time_taken;
+            public void setQuiz_score(int quiz_score) {
+                this.quiz_score = quiz_score;
             }
 
             public int getSum_correct_answer() {

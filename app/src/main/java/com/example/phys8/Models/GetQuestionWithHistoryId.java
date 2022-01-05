@@ -8,6 +8,7 @@ import com.google.gson.Gson;
 import java.util.List;
 
 public class GetQuestionWithHistoryId implements Parcelable {
+
     private List<Result> result;
 
     protected GetQuestionWithHistoryId(Parcel in) {
@@ -51,6 +52,7 @@ public class GetQuestionWithHistoryId implements Parcelable {
         private int id;
         private int sum_correct_answer;
         private Student student;
+        private int quiz_score;
         private List<Question> question;
         private String created_at;
 
@@ -81,6 +83,14 @@ public class GetQuestionWithHistoryId implements Parcelable {
 
         public void setStudent(Student student) {
             this.student = student;
+        }
+
+        public int getQuiz_score() {
+            return quiz_score;
+        }
+
+        public void setQuiz_score(int quiz_score) {
+            this.quiz_score = quiz_score;
         }
 
         public List<Question> getQuestion() {
