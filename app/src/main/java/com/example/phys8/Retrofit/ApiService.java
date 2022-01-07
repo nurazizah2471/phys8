@@ -85,7 +85,11 @@ public class ApiService {
     public Call<GetQuestionWithLevelid> getQuestionWithLevelId(String levelId) {return api.getQuestionWithLevelId(levelId);}
     public Call<Level> getAllLevel(){ return api.getAllLevel(); }
     public Call<QuizHistory> addQuizHistory(String student_id){ return api.addQuizHistory(student_id); }
-   // public Call<QuizHistory.Result> addUserAnswer(String quiz_history_id, String question_id, String user_answer){
+    public Call<QuizHistory> getQuizHistory(String student_id){ return api.getQuizHistory(student_id); }
+    public Call<QuizHistory> getRank(){ return api.getRank(); }
+
+
+    // public Call<QuizHistory.Result> addUserAnswer(String quiz_history_id, String question_id, String user_answer){
      //   return api.addUserAnswer(quiz_history_id, question_id, user_answer);
     //}
    public Call<JsonObject> addUserAnswer(String quiz_history_id, String question_id, String user_answer) {return api.addUserAnswer(quiz_history_id, question_id, user_answer);}

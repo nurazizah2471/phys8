@@ -40,6 +40,26 @@ public class QuizHistoryViewModel extends AndroidViewModel {
         return resultAddQuizHistory;
     }
 
+
+    private MutableLiveData<List<QuizHistory.Result>> resultGetQuizHistory = new MutableLiveData<>();
+
+    public void getQuizHistory(String student_id){
+        resultGetQuizHistory = quizHistoryRepository.getQuizHistory(student_id);
+    }
+    public LiveData<List<QuizHistory.Result>> getResultGetQuizHistory(){
+        return resultGetQuizHistory;
+    }
+
+    private MutableLiveData<List<QuizHistory.Result>> resultGetRank = new MutableLiveData<>();
+
+    public void getRank(){
+        resultGetRank = quizHistoryRepository.getRank();
+    }
+    public LiveData<List<QuizHistory.Result>> getResultGetRank(){
+        return resultGetRank;
+    }
+
+
    // private MutableLiveData<QuizHistory.Result> resultAddUserAnswer = new MutableLiveData<>();
 
     //public void addUserAnswer(String quiz_history_id, String question_id, String user_answer){

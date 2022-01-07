@@ -50,11 +50,19 @@ public interface ApiEndPoint {
     @FormUrlEncoded
     Call<QuizHistory> addQuizHistory(@Field("student_id") String student_id);
 
+    @GET("quiz_history")
+
+    Call<QuizHistory> getQuizHistory(@Path("student_id") String student_id);
+
     @POST("user_answer")
     @FormUrlEncoded
     Call<JsonObject> addUserAnswer(@Field("quiz_history_id") String quiz_history_id,
                                    @Field("question_id") String question_id,
                                    @Field("user_answer") String user_answer);
+
+    @GET("rank")
+
+    Call<QuizHistory> getRank();
 
     @GET("quiz_history/{quizHistoryId}")
     Call<GetQuestionWithHistoryId> getQuestionWithHistoryId(@Path("quizHistoryId") String quizHistoryId);

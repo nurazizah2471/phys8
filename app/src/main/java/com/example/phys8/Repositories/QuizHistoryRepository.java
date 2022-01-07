@@ -14,6 +14,8 @@ import com.google.gson.JsonObject;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -72,6 +74,46 @@ public class QuizHistoryRepository {
         });
 
         return listAddHistory;
+    }
+
+    public MutableLiveData<List<QuizHistory.Result>> getQuizHistory(String student_id){
+        final MutableLiveData<List<QuizHistory.Result>> listGetHistory = new MutableLiveData<>();
+
+        apiService.getQuizHistory(student_id).enqueue(new Callback<QuizHistory>() {
+            @Override
+            public void onResponse(Call<QuizHistory> call, Response<QuizHistory> response) {
+                if (response.isSuccessful()){
+
+                    listGetHistory.postValue(response.body().getResult());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<QuizHistory> call, Throwable t) {
+            }
+        });
+
+        return listGetHistory;
+    }
+
+    public MutableLiveData<List<QuizHistory.Result>> getRank(){
+        final MutableLiveData<List<QuizHistory.Result>> listGetRank = new MutableLiveData<>();
+
+        apiService.getRank().enqueue(new Callback<QuizHistory>() {
+            @Override
+            public void onResponse(Call<QuizHistory> call, Response<QuizHistory> response) {
+                if (response.isSuccessful()){
+
+                    listGetRank.postValue(response.body().getResult());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<QuizHistory> call, Throwable t) {
+            }
+        });
+
+        return listGetRank;
     }
 
     public LiveData<String> addUserAnswer(String quiz_history_id, String question_id, String user_answer) {
