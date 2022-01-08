@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 
@@ -71,7 +72,8 @@ public class BerandaFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_beranda, container, false);
     }
 
-    private Button btnPlayGame_berandaFragment;
+//    private Button btnPlayGame_berandaFragment;
+    private ImageView btnPlayGame_berandaFragment;
     private TextView textView12;
     private SharedPreferenceHelper helper;
 
@@ -83,7 +85,7 @@ public class BerandaFragment extends Fragment {
 
         helper = SharedPreferenceHelper.getInstance(requireActivity());
         helper.saveUserId("1");
-        textView12.setText(helper.getUserId());
+//        textView12.setText(helper.getUserId());
         btnPlayGame_berandaFragment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -94,6 +96,6 @@ public class BerandaFragment extends Fragment {
 
     private void inisialisasi() {
         btnPlayGame_berandaFragment = getActivity().findViewById(R.id.btnPlayGame_berandaFragment);
-        textView12 = getActivity().findViewById(R.id.textView12);
+//        textView12 = getActivity().findViewById(R.id.textView12);
     }
 }

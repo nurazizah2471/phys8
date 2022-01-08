@@ -17,4 +17,8 @@
     <string name="txt_reg_to_log2">Masuk disini</string>
     <string name="til_name">Masukkan nama</string>
     <string name="til_password_confirmation">Masukkan ulang kata sandi</string>
+    <string name="Play">Play</string>
+    <string name="cashAmount">9999</string>
+    <string name="Pengaturan">Pengaturan</string>
+    <string name="namaUser">namaUser</string>
 </resources>
