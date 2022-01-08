@@ -53,6 +53,7 @@ public class QuizHistory implements Parcelable {
         private int sum_correct_answer;
         private Object score;
         private int money_reward;
+        private Object tiket_reward;
         private Student student;
         private List<Question> question;
         private String created_at;
@@ -92,6 +93,14 @@ public class QuizHistory implements Parcelable {
 
         public void setMoney_reward(int money_reward) {
             this.money_reward = money_reward;
+        }
+
+        public Object getTiket_reward() {
+            return tiket_reward;
+        }
+
+        public void setTiket_reward(Object tiket_reward) {
+            this.tiket_reward = tiket_reward;
         }
 
         public Student getStudent() {

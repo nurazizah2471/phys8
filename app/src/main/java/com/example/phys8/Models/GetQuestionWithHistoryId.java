@@ -14,15 +14,6 @@ public class GetQuestionWithHistoryId implements Parcelable {
     protected GetQuestionWithHistoryId(Parcel in) {
     }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
     public static final Creator<GetQuestionWithHistoryId> CREATOR = new Creator<GetQuestionWithHistoryId>() {
         @Override
         public GetQuestionWithHistoryId createFromParcel(Parcel in) {
@@ -48,11 +39,21 @@ public class GetQuestionWithHistoryId implements Parcelable {
         this.result = result;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+    }
+
     public static class Result {
         private int id;
         private int sum_correct_answer;
         private Object score;
         private int money_reward;
+        private Object tiket_reward;
         private Student student;
         private List<Question> question;
         private String created_at;
@@ -92,6 +93,14 @@ public class GetQuestionWithHistoryId implements Parcelable {
 
         public void setMoney_reward(int money_reward) {
             this.money_reward = money_reward;
+        }
+
+        public Object getTiket_reward() {
+            return tiket_reward;
+        }
+
+        public void setTiket_reward(Object tiket_reward) {
+            this.tiket_reward = tiket_reward;
         }
 
         public Student getStudent() {

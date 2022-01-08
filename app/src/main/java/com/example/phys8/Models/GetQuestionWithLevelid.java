@@ -372,6 +372,7 @@ public class GetQuestionWithLevelid implements Parcelable {
             private int student_id;
             private int score;
             private int money_reward;
+            private int ticket_reward;
             private int sum_correct_answer;
             private String created_at;
             private Pivot pivot;
@@ -411,6 +412,14 @@ public class GetQuestionWithLevelid implements Parcelable {
 
             public void setMoney_reward(int money_reward) {
                 this.money_reward = money_reward;
+            }
+
+            public int getTicket_reward() {
+                return ticket_reward;
+            }
+
+            public void setTicket_reward(int ticket_reward) {
+                this.ticket_reward = ticket_reward;
             }
 
             public int getSum_correct_answer() {
