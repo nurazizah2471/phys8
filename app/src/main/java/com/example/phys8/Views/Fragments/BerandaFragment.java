@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
@@ -73,7 +74,8 @@ public class BerandaFragment extends Fragment {
     }
 
 //    private Button btnPlayGame_berandaFragment;
-    private ImageView btnPlayGame_berandaFragment;
+    private ImageView btnPlayGame_berandaFragment, btn_exit;
+    private CardView card_profile;
     private TextView textView12;
     private SharedPreferenceHelper helper;
 
@@ -86,6 +88,21 @@ public class BerandaFragment extends Fragment {
         helper = SharedPreferenceHelper.getInstance(requireActivity());
         helper.saveUserId("1");
 //        textView12.setText(helper.getUserId());
+
+        btn_exit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(view).navigate(R.id.action_berandaFragment_to_loginFragment);
+            }
+        });
+
+        card_profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(view).navigate(R.id.action_berandaFragment_to_profileFragment2);
+            }
+        });
+
         btnPlayGame_berandaFragment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -95,6 +112,8 @@ public class BerandaFragment extends Fragment {
     }
 
     private void inisialisasi() {
+        btn_exit = getActivity().findViewById(R.id.btn_exit);
+        card_profile = getActivity().findViewById(R.id.card_profile);
         btnPlayGame_berandaFragment = getActivity().findViewById(R.id.btnPlayGame_berandaFragment);
 //        textView12 = getActivity().findViewById(R.id.textView12);
     }

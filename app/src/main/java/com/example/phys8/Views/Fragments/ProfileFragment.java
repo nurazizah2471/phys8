@@ -17,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.phys8.Helpers.SharedPreferenceHelper;
@@ -78,7 +79,7 @@ public class ProfileFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_profil, container, false);
     }
 
-    private Button btn_logout_ProfileFragment;
+    private ImageView btn_logout_ProfileFragment;
     private ProfileViewModel profileViewModel;
     private SharedPreferenceHelper helper;
 
@@ -91,19 +92,21 @@ public class ProfileFragment extends Fragment {
         btn_logout_ProfileFragment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view1) {
-                profileViewModel.logout().observe(requireActivity(), new Observer<String>() {
-                    @Override
-                    public void onChanged(String s) {
 
-                        helper.clearPref();
+                Navigation.findNavController(view1).navigate(R.id.action_profileFragment_to_berandaFragment);
 
-                        Navigation.findNavController(view1).navigate(R.id.action_profilFragment_to_loginFragment);
-                        Toast.makeText(requireActivity(), s, Toast.LENGTH_SHORT).show();
+//                profileViewModel.logout().observe(requireActivity(), new Observer<String>() {
+//                    @Override
+//                    public void onChanged(String s) {
+
+//                        helper.clearPref();
+
+//                        Toast.makeText(requireActivity(), s, Toast.LENGTH_SHORT).show();
 
                     }
-                });
+//                });
 
-            }
+//        }
         });
     }
     @Override
