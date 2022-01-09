@@ -51,9 +51,9 @@ public class QuizHistory implements Parcelable {
     public static class Result {
         private int id;
         private int sum_correct_answer;
-        private Object score;
+        private int score;
         private int money_reward;
-        private Object tiket_reward;
+        private int ticket_reward;
         private Student student;
         private List<Question> question;
         private String created_at;
@@ -79,11 +79,11 @@ public class QuizHistory implements Parcelable {
             this.sum_correct_answer = sum_correct_answer;
         }
 
-        public Object getScore() {
+        public int getScore() {
             return score;
         }
 
-        public void setScore(Object score) {
+        public void setScore(int score) {
             this.score = score;
         }
 
@@ -95,12 +95,12 @@ public class QuizHistory implements Parcelable {
             this.money_reward = money_reward;
         }
 
-        public Object getTiket_reward() {
-            return tiket_reward;
+        public int getTicket_reward() {
+            return ticket_reward;
         }
 
-        public void setTiket_reward(Object tiket_reward) {
-            this.tiket_reward = tiket_reward;
+        public void setTicket_reward(int ticket_reward) {
+            this.ticket_reward = ticket_reward;
         }
 
         public Student getStudent() {
@@ -305,7 +305,7 @@ public class QuizHistory implements Parcelable {
             }
 
             public static class Pivot {
-                private int fis8_quiz_history_id;
+                private int fis8_game_play_history_id;
                 private int fis8_question_id;
                 private int id;
                 private String user_answer;
@@ -316,12 +316,12 @@ public class QuizHistory implements Parcelable {
                     return new Gson().fromJson(str, Pivot.class);
                 }
 
-                public int getFis8_quiz_history_id() {
-                    return fis8_quiz_history_id;
+                public int getFis8_game_play_history_id() {
+                    return fis8_game_play_history_id;
                 }
 
-                public void setFis8_quiz_history_id(int fis8_quiz_history_id) {
-                    this.fis8_quiz_history_id = fis8_quiz_history_id;
+                public void setFis8_game_play_history_id(int fis8_game_play_history_id) {
+                    this.fis8_game_play_history_id = fis8_game_play_history_id;
                 }
 
                 public int getFis8_question_id() {

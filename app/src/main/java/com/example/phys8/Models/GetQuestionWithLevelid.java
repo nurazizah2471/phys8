@@ -14,6 +14,15 @@ public class GetQuestionWithLevelid implements Parcelable {
     protected GetQuestionWithLevelid(Parcel in) {
     }
 
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
     public static final Creator<GetQuestionWithLevelid> CREATOR = new Creator<GetQuestionWithLevelid>() {
         @Override
         public GetQuestionWithLevelid createFromParcel(Parcel in) {
@@ -39,23 +48,14 @@ public class GetQuestionWithLevelid implements Parcelable {
         this.result = result;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-    }
-
     public static class Result {
         private int id;
         private String question_text;
         private String correct_answer_option;
-        private String discussion;
+        private Object discussion;
         private Level level;
         private List<AnswerOption> answer_option;
-        private List<QuizHistories> quiz_histories;
+        private List<GamePlayHistories> game_play_histories;
         private String created_at;
         private String updated_at;
 
@@ -88,11 +88,11 @@ public class GetQuestionWithLevelid implements Parcelable {
             this.correct_answer_option = correct_answer_option;
         }
 
-        public String getDiscussion() {
+        public Object getDiscussion() {
             return discussion;
         }
 
-        public void setDiscussion(String discussion) {
+        public void setDiscussion(Object discussion) {
             this.discussion = discussion;
         }
 
@@ -112,12 +112,12 @@ public class GetQuestionWithLevelid implements Parcelable {
             this.answer_option = answer_option;
         }
 
-        public List<QuizHistories> getQuiz_histories() {
-            return quiz_histories;
+        public List<GamePlayHistories> getGame_play_histories() {
+            return game_play_histories;
         }
 
-        public void setQuiz_histories(List<QuizHistories> quiz_histories) {
-            this.quiz_histories = quiz_histories;
+        public void setGame_play_histories(List<GamePlayHistories> game_play_histories) {
+            this.game_play_histories = game_play_histories;
         }
 
         public String getCreated_at() {
@@ -140,7 +140,7 @@ public class GetQuestionWithLevelid implements Parcelable {
             private int id;
             private int fis8_category_id;
             private String name;
-            private String thumbnail;
+            private Object thumbnail;
             private String description;
             private int score_reward;
             private int ticket_reward;
@@ -178,11 +178,11 @@ public class GetQuestionWithLevelid implements Parcelable {
                 this.name = name;
             }
 
-            public String getThumbnail() {
+            public Object getThumbnail() {
                 return thumbnail;
             }
 
-            public void setThumbnail(String thumbnail) {
+            public void setThumbnail(Object thumbnail) {
                 this.thumbnail = thumbnail;
             }
 
@@ -367,9 +367,10 @@ public class GetQuestionWithLevelid implements Parcelable {
             }
         }
 
-        public static class QuizHistories {
+        public static class GamePlayHistories {
             private int id;
             private int student_id;
+            private int fis8_level_id;
             private int score;
             private int money_reward;
             private int ticket_reward;
@@ -377,9 +378,9 @@ public class GetQuestionWithLevelid implements Parcelable {
             private String created_at;
             private Pivot pivot;
 
-            public static QuizHistories objectFromData(String str) {
+            public static GamePlayHistories objectFromData(String str) {
 
-                return new Gson().fromJson(str, QuizHistories.class);
+                return new Gson().fromJson(str, GamePlayHistories.class);
             }
 
             public int getId() {
@@ -396,6 +397,14 @@ public class GetQuestionWithLevelid implements Parcelable {
 
             public void setStudent_id(int student_id) {
                 this.student_id = student_id;
+            }
+
+            public int getFis8_level_id() {
+                return fis8_level_id;
+            }
+
+            public void setFis8_level_id(int fis8_level_id) {
+                this.fis8_level_id = fis8_level_id;
             }
 
             public int getScore() {
@@ -448,7 +457,7 @@ public class GetQuestionWithLevelid implements Parcelable {
 
             public static class Pivot {
                 private int fis8_question_id;
-                private int fis8_quiz_history_id;
+                private int fis8_game_play_history_id;
                 private int id;
                 private String user_answer;
                 private String created_at;
@@ -466,12 +475,12 @@ public class GetQuestionWithLevelid implements Parcelable {
                     this.fis8_question_id = fis8_question_id;
                 }
 
-                public int getFis8_quiz_history_id() {
-                    return fis8_quiz_history_id;
+                public int getFis8_game_play_history_id() {
+                    return fis8_game_play_history_id;
                 }
 
-                public void setFis8_quiz_history_id(int fis8_quiz_history_id) {
-                    this.fis8_quiz_history_id = fis8_quiz_history_id;
+                public void setFis8_game_play_history_id(int fis8_game_play_history_id) {
+                    this.fis8_game_play_history_id = fis8_game_play_history_id;
                 }
 
                 public int getId() {
