@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="#11AA5757">
+
+    <TextView
+        android:id="@+id/txt_rank_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="32dp"
+        android:fontFamily="@font/montserrat"
+        android:text="@string/rank2"
+        android:textColor="#FFFFFF"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/img_avatar_leaderboard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        app:layout_constraintBottom_toBottomOf="@+id/txt_rank_num"
+        app:layout_constraintStart_toEndOf="@+id/txt_rank_num"
+        app:layout_constraintTop_toTopOf="@+id/txt_rank_num"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/history_avatar" />
+
+    <TextView
+        android:id="@+id/txt_username_leaderboard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:fontFamily="@font/montserrat"
+        android:text="@string/namaUser"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/img_avatar_leaderboard"
+        app:layout_constraintStart_toEndOf="@+id/img_avatar_leaderboard"
+        app:layout_constraintTop_toTopOf="@+id/img_avatar_leaderboard" />
+
+    <ImageView
+        android:id="@+id/coin_icon_leaderboard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        app:layout_constraintBottom_toBottomOf="@+id/txt_username_leaderboard"
+        app:layout_constraintStart_toEndOf="@+id/txt_username_leaderboard"
+        app:layout_constraintTop_toTopOf="@+id/txt_username_leaderboard"
+        app:srcCompat="@drawable/coin_leaderboard" />
+
+    <TextView
+        android:id="@+id/coin_amount_leaderboard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:fontFamily="@font/montserrat"
+        android:text="@string/maxCoin"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/coin_icon_leaderboard"
+        app:layout_constraintStart_toEndOf="@+id/coin_icon_leaderboard"
+        app:layout_constraintTop_toTopOf="@+id/coin_icon_leaderboard" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

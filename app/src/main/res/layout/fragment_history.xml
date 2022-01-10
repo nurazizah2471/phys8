@@ -22,6 +22,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/history_cardview"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginStart="12dp"
@@ -38,11 +39,13 @@
         app:layout_constraintTop_toBottomOf="@+id/textView17">
 
         <ScrollView
+            android:id="@+id/history_scrollview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/ic_rectangle_5">
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/history_card_constraint"
                 android:layout_width="match_parent"
                 android:layout_height="200dp">
 

@@ -30,4 +30,9 @@
     <string name="Level">Level</string>
     <string name="Benar">Benar</string>
     <string name="JangkaWaktu">Jangka Waktu</string>
+    <string name="Peringkat">Peringkat</string>
+    <string name="rank">1</string>
+    <string name="rank2">10</string>
+    <string name="coin_amount" />
+    <string name="maxCoin">9999</string>
 </resources>
