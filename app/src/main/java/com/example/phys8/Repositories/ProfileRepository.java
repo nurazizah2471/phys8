@@ -5,12 +5,16 @@ import android.util.Log;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.phys8.Models.GetQuestionWithLevelid;
+import com.example.phys8.Models.User;
 import com.example.phys8.Retrofit.ApiService;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -80,5 +84,26 @@ public class ProfileRepository {
         });
 
         return message;
+    }
+
+    public MutableLiveData<User.Result> getUserWithId(String userId){
+        final MutableLiveData<User.Result> UserWithId = new MutableLiveData<>();
+
+        apiService.getUserWithId(userId).enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+
+                if (response.isSuccessful()){
+                    UserWithId.postValue(response.body().getResult().get(0));
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+            }
+        });
+
+        return UserWithId;
     }
 }

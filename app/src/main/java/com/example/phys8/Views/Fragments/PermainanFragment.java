@@ -90,7 +90,6 @@ public class PermainanFragment extends Fragment {
 
     private RecyclerView rv_IkonBenarSalah_FragmentPermainan, rv_PilihanGanda_FragmentPermainan;
     private TextView soal_FragmentPermainan, timer_permainanFragment;
-    private TextInputLayout teksInput_FragmentPermainan;
     private PermainanViewModel permainanViewModel;
     private SharedPreferenceHelper helper;
     private List<GetQuestionWithLevelid.Result> questionList;
@@ -108,6 +107,7 @@ public class PermainanFragment extends Fragment {
     private boolean answered;
     private rvAdapter_ikonBenarSalahKuis adapter_ikonBenarSalahKuis;
     private String levelId, quizHistoryId;
+
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -182,10 +182,7 @@ public class PermainanFragment extends Fragment {
     };
 
     private void showNextQuestion() {
-        if(levelId.equalsIgnoreCase("1")){
-            teksInput_FragmentPermainan.setVisibility(View.GONE);
             rv_PilihanGanda_FragmentPermainan.setVisibility(View.VISIBLE);
-        }
 
         if(questionCounter < questionCountTotal){
             currentQuestion = questionList.get(questionCounter);
@@ -261,7 +258,6 @@ public class PermainanFragment extends Fragment {
         timer_permainanFragment = view.findViewById(R.id.timer_permainanFragment);
         rv_PilihanGanda_FragmentPermainan = view.findViewById(R.id.rv_PilihanGanda_FragmentPermainan);
         soal_FragmentPermainan = view.findViewById(R.id.soal_FragmentPermainan);
-        teksInput_FragmentPermainan = view.findViewById(R.id.teksInput_FragmentPermainan);
 
         permainanViewModel=new ViewModelProvider(getActivity()).get(PermainanViewModel.class);
         quizHistoryViewModel=new ViewModelProvider(getActivity()).get(QuizHistoryViewModel.class);

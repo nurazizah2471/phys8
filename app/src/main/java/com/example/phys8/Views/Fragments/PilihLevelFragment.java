@@ -2,14 +2,11 @@ package com.example.phys8.Views.Fragments;
 
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
@@ -28,14 +25,13 @@ import com.example.phys8.ViewModels.PermainanViewModel;
 import com.example.phys8.ViewModels.QuizHistoryViewModel;
 
 import java.util.List;
-import java.util.ListIterator;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link pilihLevelFragment#newInstance} factory method to
+ * Use the {@link PilihLevelFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class pilihLevelFragment extends Fragment {
+public class PilihLevelFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -46,7 +42,7 @@ public class pilihLevelFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public pilihLevelFragment() {
+    public PilihLevelFragment() {
         // Required empty public constructor
     }
 
@@ -59,8 +55,8 @@ public class pilihLevelFragment extends Fragment {
      * @return A new instance of fragment pilihLevelFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static pilihLevelFragment newInstance(String param1, String param2) {
-        pilihLevelFragment fragment = new pilihLevelFragment();
+    public static PilihLevelFragment newInstance(String param1, String param2) {
+        PilihLevelFragment fragment = new PilihLevelFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -163,7 +159,7 @@ public class pilihLevelFragment extends Fragment {
                 bundleLevelId = adapter_level.getListLevel().get(position).getId();
 
                // quizHistoryViewModel.init(helper.getAccessToken()); unsend
-                quizHistoryViewModel.addQuizHistory(helper.getUserId());
+                quizHistoryViewModel.addQuizHistory(helper.getUserId(), ""+bundleLevelId);
                 quizHistoryViewModel.getResultAddQuizHistory().observe(getActivity(), showResultAddQuizHistory);
             }
         });

@@ -84,7 +84,7 @@
     </fragment>
     <fragment
         android:id="@+id/pilihLevelFragment"
-        android:name="com.example.phys8.Views.Fragments.pilihLevelFragment"
+        android:name="com.example.phys8.Views.Fragments.PilihLevelFragment"
         android:label="Pilih Level"
         tools:layout="@layout/fragment_pilih_level" >
         <action
@@ -94,7 +94,7 @@
     </fragment>
     <fragment
         android:id="@+id/historyFragment"
-        android:name="com.example.phys8.HistoryFragment"
+        android:name="com.example.phys8.Views.Fragments.HistoryFragment"
         android:label="fragment_history"
         tools:layout="@layout/fragment_history" />
 </navigation>

@@ -33,8 +33,8 @@ public class QuizHistoryViewModel extends AndroidViewModel {
 
     private MutableLiveData<QuizHistory.Result> resultAddQuizHistory = new MutableLiveData<>();
 
-    public void addQuizHistory(String student_id){
-        resultAddQuizHistory = quizHistoryRepository.addQuizHistory(student_id);
+    public void addQuizHistory(String student_id, String level_id){
+        resultAddQuizHistory = quizHistoryRepository.addQuizHistory(student_id, level_id);
     }
     public LiveData<QuizHistory.Result> getResultAddQuizHistory(){
         return resultAddQuizHistory;

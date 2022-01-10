@@ -14,6 +14,15 @@ public class User implements Parcelable {
     protected User(Parcel in) {
     }
 
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
     public static final Creator<User> CREATOR = new Creator<User>() {
         @Override
         public User createFromParcel(Parcel in) {
@@ -37,15 +46,6 @@ public class User implements Parcelable {
 
     public void setResult(List<Result> result) {
         this.result = result;
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
     }
 
     public static class Result {
@@ -152,7 +152,7 @@ public class User implements Parcelable {
             private String is_admin;
             private int ticket;
             private int money;
-            private int quiz_score;
+            private int score;
             private Object photo;
             private Object remember_token;
 
@@ -209,12 +209,12 @@ public class User implements Parcelable {
                 this.money = money;
             }
 
-            public int getQuiz_score() {
-                return quiz_score;
+            public int getScore() {
+                return score;
             }
 
-            public void setQuiz_score(int quiz_score) {
-                this.quiz_score = quiz_score;
+            public void setScore(int score) {
+                this.score = score;
             }
 
             public Object getPhoto() {

@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient_background_beranda"
     android:elevation="4dp"
     tools:context=".Views.Fragments.BerandaFragment">
 
@@ -20,18 +19,91 @@
     <!--        app:layout_constraintStart_toStartOf="parent"-->
     <!--        app:layout_constraintTop_toTopOf="parent" />-->
 
-    <ImageView
-        android:id="@+id/btnPlayGame_berandaFragment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="132dp"
-        android:background="@drawable/ic_group_30"
-        android:elevation="20sp"
-        android:src="@drawable/ic_btn_play"
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cash_toolbar"
-        app:srcCompat="@drawable/ic_group_30" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/btnPlayGame_berandaFragment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="200dp"
+                android:background="@drawable/ic_group_30"
+                android:elevation="20sp"
+                android:src="@drawable/ic_btn_play"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_group_30" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/main_menu_toolbar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:background="@drawable/gradient_corner_background"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btnPlayGame_berandaFragment">
+
+                <ImageView
+                    android:id="@+id/btn_exit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginBottom="24dp"
+                    android:src="@drawable/btn_exit"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/btn_icon_info"
+                    app:layout_constraintStart_toStartOf="@+id/btn_icon_info"
+                    app:layout_constraintTop_toBottomOf="@+id/btn_icon_info" />
+
+                <ImageView
+                    android:id="@+id/btn_sound_setting"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:src="@drawable/setting_icon"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView12" />
+
+                <ImageView
+                    android:id="@+id/btn_icon_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:src="@drawable/icon_info"
+                    app:layout_constraintEnd_toEndOf="@+id/btn_sound_setting"
+                    app:layout_constraintStart_toStartOf="@+id/btn_sound_setting"
+                    app:layout_constraintTop_toBottomOf="@+id/btn_sound_setting" />
+
+                <TextView
+                    android:id="@+id/textView12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="24dp"
+                    android:elevation="4sp"
+                    android:fontFamily="@font/rammetto_one"
+                    android:outlineProvider="none"
+                    android:text="@string/Pengaturan"
+                    android:textColor="#FFFFFF"
+                    android:translationZ="2dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 
     <!--    <androidx.cardview.widget.CardView-->
     <!--        android:layout_width="wrap_content"-->
@@ -66,226 +138,5 @@
     <!--                app:layout_constraintTop_toTopOf="parent" />-->
     <!--        </androidx.constraintlayout.widget.ConstraintLayout>-->
     <!--    </androidx.cardview.widget.CardView>-->
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cash_toolbar"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:animateLayoutChanges="false"
-        android:background="@drawable/gradient_background_rectangle"
-        android:elevation="20dp"
-        android:outlineProvider="background"
-        app:layout_constraintStart_toEndOf="@+id/card_profile"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageView
-            android:id="@+id/cash_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="4dp"
-            android:background="@drawable/ic_emojione_money_bag"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/cash_amount"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/cash_amount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:text="@string/cashAmount"
-            android:textColor="#FFFFFF"
-            android:textSize="12dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/coin_toolbar"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:animateLayoutChanges="false"
-        android:background="@drawable/gradient_background_rectangle"
-        android:elevation="20dp"
-        app:layout_constraintStart_toEndOf="@+id/ticket_toolbar"
-        app:layout_constraintTop_toTopOf="@+id/ticket_toolbar">
-
-        <ImageView
-            android:id="@+id/coin_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="4dp"
-            android:background="@drawable/ic_twemoji_coin"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/coin_amount"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/coin_amount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:text="@string/cashAmount"
-            android:textColor="#FFFFFF"
-            android:textSize="12dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/ticket_toolbar"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:animateLayoutChanges="false"
-        android:background="@drawable/gradient_background_rectangle"
-        android:elevation="20dp"
-        app:layout_constraintStart_toEndOf="@+id/cash_toolbar"
-        app:layout_constraintTop_toTopOf="@+id/cash_toolbar">
-
-        <ImageView
-            android:id="@+id/ticket_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="4dp"
-            android:background="@drawable/ic_noto_v1_ticket"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/ticket_amount"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/ticket_amount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:text="@string/cashAmount"
-            android:textColor="#FFFFFF"
-            android:textSize="12dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/card_profile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        app:cardCornerRadius="20sp"
-        app:cardElevation="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/cash_toolbar"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/profile_toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:animateLayoutChanges="false"
-            android:background="@drawable/gradient_background_rectangle"
-            android:elevation="20dp">
-
-            <ImageView
-                android:id="@+id/profile_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="8dp"
-                android:background="@drawable/ic_ep_avatar"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/name_toolbar"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/name_toolbar"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:text="@string/namaUser"
-                android:textColor="#FFFFFF"
-                android:textSize="9sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/main_menu_toolbar"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="48dp"
-        android:background="@drawable/gradient_corner_background"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnPlayGame_berandaFragment">
-
-        <ImageView
-            android:id="@+id/btn_exit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:src="@drawable/btn_exit"
-            app:layout_constraintEnd_toEndOf="@+id/btn_icon_info"
-            app:layout_constraintStart_toStartOf="@+id/btn_icon_info"
-            app:layout_constraintTop_toBottomOf="@+id/btn_icon_info" />
-
-        <ImageView
-            android:id="@+id/btn_sound_setting"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:src="@drawable/setting_icon"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView12" />
-
-        <ImageView
-            android:id="@+id/btn_icon_info"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:src="@drawable/icon_info"
-            app:layout_constraintEnd_toEndOf="@+id/btn_sound_setting"
-            app:layout_constraintStart_toStartOf="@+id/btn_sound_setting"
-            app:layout_constraintTop_toBottomOf="@+id/btn_sound_setting" />
-
-        <TextView
-            android:id="@+id/textView12"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="24dp"
-            android:elevation="4sp"
-            android:fontFamily="@font/rammetto_one"
-            android:outlineProvider="none"
-            android:text="@string/Pengaturan"
-            android:textColor="#FFFFFF"
-            android:translationZ="2dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

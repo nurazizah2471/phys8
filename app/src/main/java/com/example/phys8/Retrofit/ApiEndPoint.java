@@ -48,7 +48,7 @@ public interface ApiEndPoint {
 
     @POST("quiz_history")
     @FormUrlEncoded
-    Call<QuizHistory> addQuizHistory(@Field("student_id") String student_id);
+    Call<QuizHistory> addQuizHistory(@Field("student_id") String student_id, @Field("fis8_level_id") String fis8_level_id);
 
     @GET("quiz_history")
 
@@ -66,4 +66,8 @@ public interface ApiEndPoint {
 
     @GET("quiz_history/{quizHistoryId}")
     Call<GetQuestionWithHistoryId> getQuestionWithHistoryId(@Path("quizHistoryId") String quizHistoryId);
+
+    @GET("myuser/{myUserId}")
+    Call<User> getUserWithId(@Path("myUserId") String myUserId);
+
 }

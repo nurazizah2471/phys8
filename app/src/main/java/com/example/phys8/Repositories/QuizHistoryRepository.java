@@ -56,10 +56,10 @@ public class QuizHistoryRepository {
         }
     }
 
-    public MutableLiveData<QuizHistory.Result> addQuizHistory(String student_id){
+    public MutableLiveData<QuizHistory.Result> addQuizHistory(String student_id, String level_id){
         final MutableLiveData<QuizHistory.Result> listAddHistory = new MutableLiveData<>();
 
-        apiService.addQuizHistory(student_id).enqueue(new Callback<QuizHistory>() {
+        apiService.addQuizHistory(student_id, level_id).enqueue(new Callback<QuizHistory>() {
             @Override
             public void onResponse(Call<QuizHistory> call, Response<QuizHistory> response) {
                 if (response.isSuccessful()){

@@ -77,7 +77,6 @@ public class BerandaFragment extends Fragment {
     private ImageView btnPlayGame_berandaFragment, btn_exit;
     private CardView card_profile;
     private TextView textView12;
-    private SharedPreferenceHelper helper;
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -85,8 +84,7 @@ public class BerandaFragment extends Fragment {
 
         inisialisasi();
 
-        helper = SharedPreferenceHelper.getInstance(requireActivity());
-        helper.saveUserId("1");
+
 //        textView12.setText(helper.getUserId());
 
         btn_exit.setOnClickListener(new View.OnClickListener() {
