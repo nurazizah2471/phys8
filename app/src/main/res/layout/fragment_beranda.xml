@@ -74,7 +74,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:animateLayoutChanges="false"
-        android:background="@drawable/backgorund_correct_answer_gameplay"
+        android:background="@drawable/gradient_background_rectangle"
         android:elevation="20dp"
         android:outlineProvider="background"
         app:layout_constraintStart_toEndOf="@+id/card_profile"
@@ -113,7 +113,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:animateLayoutChanges="false"
-        android:background="@drawable/backgorund_correct_answer_gameplay"
+        android:background="@drawable/gradient_background_rectangle"
         android:elevation="20dp"
         app:layout_constraintStart_toEndOf="@+id/ticket_toolbar"
         app:layout_constraintTop_toTopOf="@+id/ticket_toolbar">
@@ -151,7 +151,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:animateLayoutChanges="false"
-        android:background="@drawable/backgorund_correct_answer_gameplay"
+        android:background="@drawable/gradient_background_rectangle"
         android:elevation="20dp"
         app:layout_constraintStart_toEndOf="@+id/cash_toolbar"
         app:layout_constraintTop_toTopOf="@+id/cash_toolbar">
@@ -200,7 +200,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:animateLayoutChanges="false"
-            android:background="@drawable/backgorund_correct_answer_gameplay"
+            android:background="@drawable/gradient_background_rectangle"
             android:elevation="20dp">
 
             <ImageView

@@ -5,17 +5,21 @@
       <map>
         <entry key="..\:/phys8/app/src/main/res/drawable-v24/gradient_background_corner.xml" value="0.15026087454956302" />
         <entry key="..\:/phys8/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.17291666666666666" />
+        <entry key="..\:/phys8/app/src/main/res/drawable/backgorund_correct_answer_gameplay.xml" value="0.21904761904761905" />
         <entry key="..\:/phys8/app/src/main/res/drawable/background_false_answer_gameplay.xml" value="0.21861471861471862" />
         <entry key="..\:/phys8/app/src/main/res/drawable/bg_btn_nonactive.xml" value="0.12314814814814815" />
+        <entry key="..\:/phys8/app/src/main/res/drawable/bg_btn_red_active.xml" value="0.21904761904761905" />
         <entry key="..\:/phys8/app/src/main/res/drawable/bg_btn_red_inloading.xml" value="0.225" />
         <entry key="..\:/phys8/app/src/main/res/drawable/bg_logreg.xml" value="0.17291666666666666" />
         <entry key="..\:/phys8/app/src/main/res/drawable/bg_til.xml" value="0.225" />
         <entry key="..\:/phys8/app/src/main/res/drawable/btn_profile_kembali.xml" value="0.21645021645021645" />
+        <entry key="..\:/phys8/app/src/main/res/drawable/correct_gameplay.xml" value="0.21904761904761905" />
         <entry key="..\:/phys8/app/src/main/res/drawable/gradient_background.xml" value="0.17291666666666666" />
         <entry key="..\:/phys8/app/src/main/res/drawable/gradient_background_beranda.xml" value="0.14537037037037037" />
         <entry key="..\:/phys8/app/src/main/res/drawable/gradient_background_bottom_corner.xml" value="0.21861471861471862" />
         <entry key="..\:/phys8/app/src/main/res/drawable/gradient_background_bottom_corner2.xml" value="0.21861471861471862" />
         <entry key="..\:/phys8/app/src/main/res/drawable/gradient_background_corner.xml" value="0.14791666666666667" />
+        <entry key="..\:/phys8/app/src/main/res/drawable/gradient_background_rectangle.xml" value="0.21904761904761905" />
         <entry key="..\:/phys8/app/src/main/res/drawable/gradient_corner_background.xml" value="0.14791666666666667" />
         <entry key="..\:/phys8/app/src/main/res/drawable/ic_belumjawabkuis.xml" value="0.21510416666666668" />
         <entry key="..\:/phys8/app/src/main/res/drawable/ic_btn_play.xml" value="0.559304366378929" />
@@ -36,11 +40,11 @@
         <entry key="..\:/phys8/app/src/main/res/drawable/profile_noto_v1_ticket.xml" value="0.21731601731601732" />
         <entry key="..\:/phys8/app/src/main/res/drawable/profile_twemoji_coin.xml" value="0.21731601731601732" />
         <entry key="..\:/phys8/app/src/main/res/drawable/progressdialogshape.xml" value="0.225" />
-        <entry key="..\:/phys8/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/phys8/app/src/main/res/layout/activity_main.xml" value="0.2754782700075322" />
         <entry key="..\:/phys8/app/src/main/res/layout/card_ikon_benar_salah_kuis.xml" value="0.2942708333333333" />
-        <entry key="..\:/phys8/app/src/main/res/layout/card_level_game.xml" value="0.2754782700075322" />
+        <entry key="..\:/phys8/app/src/main/res/layout/card_level_game.xml" value="0.626086977289846" />
         <entry key="..\:/phys8/app/src/main/res/layout/card_pilgan_permainan_fragment.xml" value="0.1" />
-        <entry key="..\:/phys8/app/src/main/res/layout/fragment_beranda.xml" value="0.626086977289846" />
+        <entry key="..\:/phys8/app/src/main/res/layout/fragment_beranda.xml" value="0.2086956590966153" />
         <entry key="..\:/phys8/app/src/main/res/layout/fragment_history.xml" value="0.19895833333333332" />
         <entry key="..\:/phys8/app/src/main/res/layout/fragment_login.xml" value="0.27340823970037453" />
         <entry key="..\:/phys8/app/src/main/res/layout/fragment_permainan.xml" value="0.2086956590966153" />
