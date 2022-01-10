@@ -5,6 +5,7 @@
       <map>
         <entry key="..\:/phys8/app/src/main/res/drawable-v24/gradient_background_corner.xml" value="0.15026087454956302" />
         <entry key="..\:/phys8/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.17291666666666666" />
+        <entry key="..\:/phys8/app/src/main/res/drawable/background_false_answer_gameplay.xml" value="0.21861471861471862" />
         <entry key="..\:/phys8/app/src/main/res/drawable/bg_btn_nonactive.xml" value="0.12314814814814815" />
         <entry key="..\:/phys8/app/src/main/res/drawable/bg_btn_red_inloading.xml" value="0.225" />
         <entry key="..\:/phys8/app/src/main/res/drawable/bg_logreg.xml" value="0.17291666666666666" />
@@ -12,6 +13,8 @@
         <entry key="..\:/phys8/app/src/main/res/drawable/btn_profile_kembali.xml" value="0.21645021645021645" />
         <entry key="..\:/phys8/app/src/main/res/drawable/gradient_background.xml" value="0.17291666666666666" />
         <entry key="..\:/phys8/app/src/main/res/drawable/gradient_background_beranda.xml" value="0.14537037037037037" />
+        <entry key="..\:/phys8/app/src/main/res/drawable/gradient_background_bottom_corner.xml" value="0.21861471861471862" />
+        <entry key="..\:/phys8/app/src/main/res/drawable/gradient_background_bottom_corner2.xml" value="0.21861471861471862" />
         <entry key="..\:/phys8/app/src/main/res/drawable/gradient_background_corner.xml" value="0.14791666666666667" />
         <entry key="..\:/phys8/app/src/main/res/drawable/gradient_corner_background.xml" value="0.14791666666666667" />
         <entry key="..\:/phys8/app/src/main/res/drawable/ic_belumjawabkuis.xml" value="0.21510416666666668" />
