@@ -21,4 +21,13 @@
     <string name="cashAmount">9999</string>
     <string name="Pengaturan">Pengaturan</string>
     <string name="namaUser">namaUser</string>
+    <string name="title_history">Histori Bermain</string>
+    <string name="waktu">Waktu</string>
+    <string name="date">31/12/9999</string>
+    <string name="level">99</string>
+    <string name="amount_answers">10/10</string>
+    <string name="Waktu">Waktu</string>
+    <string name="Level">Level</string>
+    <string name="Benar">Benar</string>
+    <string name="JangkaWaktu">Jangka Waktu</string>
 </resources>
