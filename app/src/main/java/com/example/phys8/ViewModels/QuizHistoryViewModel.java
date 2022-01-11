@@ -10,6 +10,8 @@ import androidx.lifecycle.MutableLiveData;
 import com.example.phys8.Models.GetQuestionWithLevelid;
 import com.example.phys8.Models.Level;
 import com.example.phys8.Models.QuizHistory;
+import com.example.phys8.Models.Rank;
+import com.example.phys8.Models.userHistory;
 import com.example.phys8.Repositories.PermainanRepository;
 import com.example.phys8.Repositories.QuizHistoryRepository;
 
@@ -22,40 +24,40 @@ public class QuizHistoryViewModel extends AndroidViewModel {
         super(application);
 
         //no
-        quizHistoryRepository = QuizHistoryRepository.getInstance();
+        //quizHistoryRepository = QuizHistoryRepository.getInstance();
     }
 
     //unsend
-    //public void init(String token){
+    public void init(String token){
 
-      //  quizHistoryRepository = QuizHistoryRepository.getInstance(token);
-    //}
+        quizHistoryRepository = QuizHistoryRepository.getInstance(token);
+    }
 
-    private MutableLiveData<QuizHistory.Result> resultAddQuizHistory = new MutableLiveData<>();
+    private MutableLiveData<List<QuizHistory.Result>> resultAddQuizHistory = new MutableLiveData<>();
 
     public void addQuizHistory(String student_id, String level_id){
         resultAddQuizHistory = quizHistoryRepository.addQuizHistory(student_id, level_id);
     }
-    public LiveData<QuizHistory.Result> getResultAddQuizHistory(){
+    public LiveData<List<QuizHistory.Result>> getResultAddQuizHistory(){
         return resultAddQuizHistory;
     }
 
 
-    private MutableLiveData<List<QuizHistory.Result>> resultGetQuizHistory = new MutableLiveData<>();
+    private MutableLiveData<List<userHistory.Result>> resultGetQuizHistory = new MutableLiveData<>();
 
     public void getQuizHistory(String student_id){
         resultGetQuizHistory = quizHistoryRepository.getQuizHistory(student_id);
     }
-    public LiveData<List<QuizHistory.Result>> getResultGetQuizHistory(){
+    public LiveData<List<userHistory.Result>> getResultGetQuizHistory(){
         return resultGetQuizHistory;
     }
 
-    private MutableLiveData<List<QuizHistory.Result>> resultGetRank = new MutableLiveData<>();
+    private MutableLiveData<List<Rank.Result>> resultGetRank = new MutableLiveData<>();
 
     public void getRank(){
         resultGetRank = quizHistoryRepository.getRank();
     }
-    public LiveData<List<QuizHistory.Result>> getResultGetRank(){
+    public LiveData<List<Rank.Result>> getResultGetRank(){
         return resultGetRank;
     }
 

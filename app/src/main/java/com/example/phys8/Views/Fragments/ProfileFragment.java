@@ -18,11 +18,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.phys8.Helpers.SharedPreferenceHelper;
+import com.example.phys8.Models.User;
 import com.example.phys8.R;
 import com.example.phys8.ViewModels.ProfileViewModel;
+
+import org.w3c.dom.Text;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -82,6 +86,8 @@ public class ProfileFragment extends Fragment {
     private ImageView btn_logout_ProfileFragment;
     private ProfileViewModel profileViewModel;
     private SharedPreferenceHelper helper;
+    private ImageView btn_profile_peringkat, btn_profile_history;
+    private TextView txt_stats_ticket, txt_stats_coin, txt_stats_cash, txt_profile_nama;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -89,11 +95,30 @@ public class ProfileFragment extends Fragment {
 
         initial();
 
+        profileViewModel.init(helper.getAccessToken());// unsend
+        profileViewModel.getUserWithId2(helper.getUserId());
+        profileViewModel.getResultUserWithId2().observe(getActivity(), showResultUserInfo2);
+
+
+        btn_profile_peringkat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(v).navigate(R.id.action_profileFragment_to_peringkatFragment);
+            }
+        });
+
+        btn_profile_history.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(v).navigate(R.id.action_profileFragment_to_historyFragment);
+            }
+        });
+
         btn_logout_ProfileFragment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view1) {
 
-                Navigation.findNavController(view1).navigate(R.id.action_profileFragment_to_berandaFragment);
+           //     Navigation.findNavController(view1).navigate(R.id.action_profileFragment_to_berandaFragment);
 
 //                profileViewModel.logout().observe(requireActivity(), new Observer<String>() {
 //                    @Override
@@ -109,6 +134,20 @@ public class ProfileFragment extends Fragment {
 //        }
         });
     }
+
+    private Observer<User.Result> showResultUserInfo2 = new Observer<User.Result>() {
+        @Override
+        public void onChanged(User.Result results) {
+            if(results.getUsername().length()>10) {
+                txt_profile_nama.setText(String.valueOf(results.getUsername().subSequence(0, 10)+"..."));
+            }else {
+                txt_profile_nama.setText(String.valueOf(results.getUsername()));
+            }
+            txt_stats_cash.setText(String.valueOf(results.getMyuser().getMoney()));
+            txt_stats_ticket.setText(String.valueOf(results.getMyuser().getTicket()));
+            txt_stats_coin.setText(String.valueOf(results.getMyuser().getScore()));
+        }
+    };
     @Override
     public void onDetach() {
         super.onDetach();
@@ -117,9 +156,15 @@ public class ProfileFragment extends Fragment {
 
     private void initial() {
         btn_logout_ProfileFragment = getActivity().findViewById(R.id.btn_logout_ProfileFragment);
+        btn_profile_peringkat = getActivity().findViewById(R.id.btn_profile_peringkat);
+        btn_profile_history = getActivity().findViewById(R.id.btn_profile_history);
+        txt_stats_cash = getActivity().findViewById(R.id.txt_stats_cash);
+        txt_stats_coin = getActivity().findViewById(R.id.txt_stats_coin);
+        txt_stats_ticket = getActivity().findViewById(R.id.txt_stats_ticket);
+        txt_profile_nama = getActivity().findViewById(R.id.txt_profile_nama);
 
         helper = SharedPreferenceHelper.getInstance(requireActivity());
         profileViewModel = new ViewModelProvider(getActivity()).get(ProfileViewModel.class);
-        //profileViewModel.init(helper.getAccessToken()); unsend
+
     }
 }

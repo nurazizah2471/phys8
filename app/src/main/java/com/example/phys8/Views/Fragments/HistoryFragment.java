@@ -7,13 +7,19 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.phys8.Adapters.rvAdapter_history;
+import com.example.phys8.Adapters.rvAdapter_peringkat;
 import com.example.phys8.Helpers.SharedPreferenceHelper;
 import com.example.phys8.Models.QuizHistory;
+import com.example.phys8.Models.Rank;
+import com.example.phys8.Models.userHistory;
 import com.example.phys8.R;
 import com.example.phys8.ViewModels.QuizHistoryViewModel;
 
@@ -75,8 +81,10 @@ public class HistoryFragment extends Fragment {
 
     private QuizHistoryViewModel quizHistoryViewModel;
     private SharedPreferenceHelper helper;
+    private RecyclerView rv_history;
     private List <QuizHistory.Result> arrayHistory;
-    private List <QuizHistory.Result> arrayRank;
+    private rvAdapter_history adapter_history;
+
 
 
     @Override
@@ -84,35 +92,32 @@ public class HistoryFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         inisialisasi(view);
 
-        //quizHistoryViewModel.init(helper.getAccessToken()); unsend
+        quizHistoryViewModel.init(helper.getAccessToken()); //unsend
         quizHistoryViewModel.getQuizHistory(helper.getUserId());
         quizHistoryViewModel.getResultGetQuizHistory().observe(getActivity(), showResultQuizHistory);
-
-        //quizHistoryViewModel.init(helper.getAccessToken()); unsend
-        quizHistoryViewModel.getRank();
-        quizHistoryViewModel.getResultGetRank().observe(getActivity(), showResultRank);
     }
 
-    private Observer<List<QuizHistory.Result>> showResultQuizHistory = new Observer<List<QuizHistory.Result>>() {
+    private Observer<List<userHistory.Result>> showResultQuizHistory = new Observer<List<userHistory.Result>>() {
         @Override
-        public void onChanged(List<QuizHistory.Result> results) {
+        public void onChanged(List<userHistory.Result> results) {
             if(results!=null) {
-                arrayHistory = results;
+            setRvHistory(results);
             }
         }
     };
 
-    private Observer<List<QuizHistory.Result>> showResultRank = new Observer<List<QuizHistory.Result>>() {
-        @Override
-        public void onChanged(List<QuizHistory.Result> results) {
-            if(results!=null) {
-                arrayRank = results;
-            }
-        }
-    };
+    private void setRvHistory(List<userHistory.Result> results) {
+        rv_history.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+        adapter_history = new rvAdapter_history(getActivity());
+        adapter_history.setListhistoryAdapter(results);
+        rv_history.setAdapter(adapter_history);
+    }
+
 
 
     private void inisialisasi(View view) {
+        helper = SharedPreferenceHelper.getInstance(requireActivity());
+        rv_history = getActivity().findViewById(R.id.rv_history);
         quizHistoryViewModel=new ViewModelProvider(getActivity()).get(QuizHistoryViewModel.class);
     }
 }

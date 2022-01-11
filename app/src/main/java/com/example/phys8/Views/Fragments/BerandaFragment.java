@@ -6,6 +6,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
@@ -17,7 +19,9 @@ import android.widget.TextView;
 
 
 import com.example.phys8.Helpers.SharedPreferenceHelper;
+import com.example.phys8.Models.User;
 import com.example.phys8.R;
+import com.example.phys8.ViewModels.ProfileViewModel;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -77,12 +81,19 @@ public class BerandaFragment extends Fragment {
     private ImageView btnPlayGame_berandaFragment, btn_exit;
     private CardView card_profile;
     private TextView textView12;
+    ProfileViewModel profileViewModel;
+
+    private SharedPreferenceHelper helper;
+    TextView ticket_amount, cash_amount, coin_amount, name_user;
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         inisialisasi();
+        profileViewModel.init(helper.getAccessToken()); //unsend
+        profileViewModel.getUserWithId(helper.getUserId());
+        profileViewModel.getResultUserWithId().observe(getActivity(), showResultUserInfo);
 
 
 //        textView12.setText(helper.getUserId());
@@ -97,7 +108,7 @@ public class BerandaFragment extends Fragment {
         card_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Navigation.findNavController(view).navigate(R.id.action_berandaFragment_to_profileFragment2);
+                Navigation.findNavController(v).navigate(R.id.action_berandaFragment_to_profileFragment);
             }
         });
 
@@ -109,10 +120,29 @@ public class BerandaFragment extends Fragment {
         });
     }
 
+    private Observer<User.Result> showResultUserInfo = new Observer<User.Result>() {
+        @Override
+        public void onChanged(User.Result results) {
+            if(results.getUsername().length()>5) {
+                name_user.setText(String.valueOf(results.getUsername().subSequence(0, 5)+"..."));
+            }else {
+                name_user.setText(String.valueOf(results.getUsername()));
+            }
+            cash_amount.setText(String.valueOf(results.getMyuser().getMoney()));
+            ticket_amount.setText(String.valueOf(results.getMyuser().getTicket()));
+            coin_amount.setText(String.valueOf(results.getMyuser().getScore()));
+        }
+    };
+
     private void inisialisasi() {
+        ticket_amount = getActivity().findViewById(R.id.ticket_amount);
+        cash_amount = getActivity().findViewById(R.id.cash_amount);
+        coin_amount = getActivity().findViewById(R.id.coin_amount);
+        name_user = getActivity().findViewById(R.id.name_user);
         btn_exit = getActivity().findViewById(R.id.btn_exit);
         card_profile = getActivity().findViewById(R.id.card_profile);
         btnPlayGame_berandaFragment = getActivity().findViewById(R.id.btnPlayGame_berandaFragment);
+        profileViewModel=new ViewModelProvider(this).get(ProfileViewModel.class);
 //        textView12 = getActivity().findViewById(R.id.textView12);
     }
 }

@@ -2,13 +2,27 @@ package com.example.phys8.Views.Fragments;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.phys8.Adapters.rvAdapter_level;
+import com.example.phys8.Adapters.rvAdapter_peringkat;
+import com.example.phys8.Helpers.SharedPreferenceHelper;
+import com.example.phys8.Models.Rank;
 import com.example.phys8.R;
+import com.example.phys8.ViewModels.QuizHistoryViewModel;
+
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -47,6 +61,46 @@ public class LeaderboardFragment extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
+    private RecyclerView rv_leaderBoard;
+    private QuizHistoryViewModel quizHistoryViewModel;
+    private SharedPreferenceHelper helper;
+    private List<Rank.Result> arrayRank;
+    private rvAdapter_peringkat adapter_peringkat;
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        inisialisasi(view);
+        quizHistoryViewModel.init(helper.getAccessToken());// unsend
+        quizHistoryViewModel.getRank();
+        quizHistoryViewModel.getResultGetRank().observe(getActivity(), showResultRank);
+
+    }
+
+    private void inisialisasi(View view) {
+        helper = SharedPreferenceHelper.getInstance(requireActivity());
+        rv_leaderBoard = view.findViewById(R.id.rv_leaderBoard);
+        quizHistoryViewModel=new ViewModelProvider(getActivity()).get(QuizHistoryViewModel.class);
+    }
+
+
+    private Observer<List<Rank.Result>> showResultRank = new Observer<List<Rank.Result>>() {
+        @Override
+        public void onChanged(List<Rank.Result> results) {
+            if(results!=null) {
+                set_RVRank(results);
+              //  arrayRank = results;
+            }
+        }
+    };
+
+    private void set_RVRank(List<Rank.Result> results) {
+        rv_leaderBoard.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+        adapter_peringkat = new rvAdapter_peringkat(getActivity());
+        adapter_peringkat.setListperingkatAdapter(results);
+        rv_leaderBoard.setAdapter(adapter_peringkat);
+    }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

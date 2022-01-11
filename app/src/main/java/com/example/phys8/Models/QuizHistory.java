@@ -50,6 +50,7 @@ public class QuizHistory implements Parcelable {
 
     public static class Result {
         private int id;
+        private int fis8_level_id;
         private int sum_correct_answer;
         private int score;
         private int money_reward;
@@ -69,6 +70,14 @@ public class QuizHistory implements Parcelable {
 
         public void setId(int id) {
             this.id = id;
+        }
+
+        public int getFis8_level_id() {
+            return fis8_level_id;
+        }
+
+        public void setFis8_level_id(int fis8_level_id) {
+            this.fis8_level_id = fis8_level_id;
         }
 
         public int getSum_correct_answer() {

@@ -23,13 +23,7 @@ public class CategoryViewModel extends AndroidViewModel {
     }
 
     //== Begin of view model to get all category
-    private MutableLiveData<Categories> resultCategories = new MutableLiveData<>();
-    public void getCategories(){
-        resultCategories = categoryRepository.getCategories();
-    }
-    public LiveData<Categories> getResultCategories(){
-        return resultCategories;
-    }
+
 
     @Override
     protected void onCleared() {

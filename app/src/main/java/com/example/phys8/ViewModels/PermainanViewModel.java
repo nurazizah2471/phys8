@@ -22,14 +22,14 @@ public class PermainanViewModel extends AndroidViewModel {
     public PermainanViewModel(Application application) {
         super(application);
         //no
-        permainanRepository = permainanRepository.getInstance();
+        //permainanRepository = permainanRepository.getInstance();
     }
 
     //unsend
-    //public void init(String token){
+    public void init(String token){
 
-     //   permainanRepository = PermainanRepository.getInstance(token);
-   // }
+        permainanRepository = PermainanRepository.getInstance(token);
+    }
 
 
     //== Begin of view model to get question with level id
@@ -45,6 +45,13 @@ public class PermainanViewModel extends AndroidViewModel {
         resultAllLevel = permainanRepository.getAllLevel();
     }
     public LiveData<List<Level.Result>> getResultAllLevel(){return resultAllLevel;}
+
+    //== Begin of view model to get level
+    private MutableLiveData<List<Level.Result>> resultLevel = new MutableLiveData<>();
+    public void getLevelWithID(String levelID){
+        resultLevel = permainanRepository.getLevelWithID(levelID);
+    }
+    public LiveData<List<Level.Result>> getResultLevel(){return resultLevel;}
 
     private MutableLiveData<List<GetQuestionWithHistoryId.Result>> resultQuestionWithHistoryId = new MutableLiveData<>();
     public void getQuestionWithHistoryId(String quizHistoryId){

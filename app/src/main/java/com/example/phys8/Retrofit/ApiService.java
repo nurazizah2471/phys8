@@ -1,24 +1,22 @@
 package com.example.phys8.Retrofit;
 
 import com.example.phys8.Helpers.Const;
-import com.example.phys8.Models.Categories;
 import com.example.phys8.Models.GetQuestionWithHistoryId;
 import com.example.phys8.Models.GetQuestionWithLevelid;
 import com.example.phys8.Models.Level;
 import com.example.phys8.Models.QuizHistory;
+import com.example.phys8.Models.Rank;
 import com.example.phys8.Models.Register;
 import com.example.phys8.Models.TokenResponse;
 import com.example.phys8.Models.User;
+import com.example.phys8.Models.userHistory;
 import com.google.gson.JsonObject;
-
-import java.util.List;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-import retrofit2.http.Path;
 
 public class ApiService {
 
@@ -78,15 +76,13 @@ public class ApiService {
         return api.logout();
     }
 
-    public Call<Categories> getCategories(){
-        return api.getCategory();
-    }
     public Call<User> getUsers(){ return api.getUsers(); }
     public Call<GetQuestionWithLevelid> getQuestionWithLevelId(String levelId) {return api.getQuestionWithLevelId(levelId);}
     public Call<Level> getAllLevel(){ return api.getAllLevel(); }
+    public Call<Level> getLevelWithID(String levelID){ return api.getLevelWithID(levelID); }
     public Call<QuizHistory> addQuizHistory(String student_id, String level_id){ return api.addQuizHistory(student_id, level_id); }
-    public Call<QuizHistory> getQuizHistory(String student_id){ return api.getQuizHistory(student_id); }
-    public Call<QuizHistory> getRank(){ return api.getRank(); }
+    public Call<userHistory> getQuizHistory(String student_id){ return api.getQuizHistory(student_id); }
+    public Call<Rank> getRank(){ return api.getRank(); }
 
 
     // public Call<QuizHistory.Result> addUserAnswer(String quiz_history_id, String question_id, String user_answer){
@@ -95,5 +91,5 @@ public class ApiService {
    public Call<JsonObject> addUserAnswer(String quiz_history_id, String question_id, String user_answer) {return api.addUserAnswer(quiz_history_id, question_id, user_answer);}
     public Call<GetQuestionWithHistoryId> getQuestionWithHistoryId(String quizHistoryId) {return api.getQuestionWithHistoryId(quizHistoryId);}
     public Call<User> getUserWithId(String userId) {return api.getUserWithId(userId);}
-
+    public Call<JsonObject> updateRewardQuiz(String quiz_history_id, int score_level, int money_level, int ticket_level) {return api.updateRewardQuiz(quiz_history_id, score_level, money_level, ticket_level);}
 }

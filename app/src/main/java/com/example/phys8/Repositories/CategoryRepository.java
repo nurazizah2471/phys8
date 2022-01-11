@@ -34,25 +34,5 @@ public class CategoryRepository {
         }
     }
 
-    public MutableLiveData<Categories> getCategories(){
-        final MutableLiveData<Categories> listCategories = new MutableLiveData<>();
 
-        apiService.getCategories().enqueue(new Callback<Categories>() {
-            @Override
-            public void onResponse(Call<Categories> call, Response<Categories> response) {
-
-                if (response.isSuccessful()){
-                    if (response.body() != null){
-                        listCategories.postValue(response.body());
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<Categories> call, Throwable t) {
-            }
-        });
-
-        return listCategories;
-    }
 }

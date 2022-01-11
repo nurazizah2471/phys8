@@ -20,29 +20,29 @@ public class PermainanRepository {
     private ApiService apiService;
 
     //unsend
-   // private PermainanRepository(String token){
-     //   apiService = ApiService.getInstance(token);
-    //}
+    private PermainanRepository(String token){
+        apiService = ApiService.getInstance(token);
+    }
 
     //no
-    private PermainanRepository(){
-           apiService = ApiService.getInstance("");
-        }
-    //unsend
-   // public static PermainanRepository getInstance(String token){
-     //   if (permainanRepository == null){
-       //     permainanRepository = new PermainanRepository(token);
+    //private PermainanRepository(){
+      //     apiService = ApiService.getInstance("");
         //}
-       // return permainanRepository;
-    //}
+    //unsend
+    public static PermainanRepository getInstance(String token){
+        if (permainanRepository == null){
+            permainanRepository = new PermainanRepository(token);
+        }
+        return permainanRepository;
+    }
 
     //no
-    public static PermainanRepository getInstance(){
-           if (permainanRepository == null){
-             permainanRepository = new PermainanRepository();
-        }
-         return permainanRepository;
-        }
+    ///public static PermainanRepository getInstance(){
+       //    if (permainanRepository == null){
+         //    permainanRepository = new PermainanRepository();
+        //}
+         //return permainanRepository;
+        //}
 
     public synchronized void resetInstance(){
         if (permainanRepository != null){
@@ -90,6 +90,25 @@ public class PermainanRepository {
         });
 
         return listAllLevel;
+    }
+
+    public MutableLiveData<List<Level.Result>> getLevelWithID(String levelID){
+        final MutableLiveData<List<Level.Result>> listLevel = new MutableLiveData<>();
+
+        apiService.getLevelWithID(levelID).enqueue(new Callback<Level>() {
+            @Override
+            public void onResponse(Call<Level> call, Response<Level> response) {
+
+                if (response.isSuccessful()){
+                    listLevel.postValue(response.body().getResult());
+                }
+            }
+            @Override
+            public void onFailure(Call<Level> call, Throwable t) {
+            }
+        });
+
+        return listLevel;
     }
 
     public MutableLiveData<List<GetQuestionWithHistoryId.Result>> getQuestionWithHistoryId(String quizHistoryId){

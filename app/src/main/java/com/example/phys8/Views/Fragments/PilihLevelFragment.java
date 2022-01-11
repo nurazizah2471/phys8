@@ -2,6 +2,7 @@ package com.example.phys8.Views.Fragments;
 
 import android.os.Bundle;
 
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -24,6 +25,7 @@ import com.example.phys8.R;
 import com.example.phys8.ViewModels.PermainanViewModel;
 import com.example.phys8.ViewModels.QuizHistoryViewModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -89,7 +91,10 @@ public class PilihLevelFragment extends Fragment {
     private int numberOfColumns;
     private int bundleLevelId;
     private View myv;
+    String checkAvailable;
     private Bundle bundle;
+    private List<Level.Result> arrayListLevel;
+    private int score_level, money_level, ticket_level, positions;
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -97,12 +102,10 @@ public class PilihLevelFragment extends Fragment {
         inisialisasi(view);
         addItemClickSupport();
 
-
         keteranganLevel_levelFragment.setText("Sedang menapilkan level...");
-        //permainanViewModel.init(helper.getAccessToken()); unsend
+        permainanViewModel.init(helper.getAccessToken()); //unsend
         permainanViewModel.getAllLevel();
         permainanViewModel.getResultAllLevel().observe(getActivity(), showResultLevel);
-
 
     }
 
@@ -112,6 +115,7 @@ public class PilihLevelFragment extends Fragment {
         numberOfColumns = 5;
         myv = view;
 
+        helper = SharedPreferenceHelper.getInstance(requireActivity());
         permainanViewModel=new ViewModelProvider(getActivity()).get(PermainanViewModel.class);
         quizHistoryViewModel=new ViewModelProvider(getActivity()).get(QuizHistoryViewModel.class);
     }
@@ -133,16 +137,31 @@ public class PilihLevelFragment extends Fragment {
         @Override
         public void onChanged(List<Level.Result> results) {
             setRV_level(results);
+            arrayListLevel = new ArrayList<>();
+            arrayListLevel = results;
         }
     };
 
-    private Observer<QuizHistory.Result> showResultAddQuizHistory = new Observer<QuizHistory.Result>() {
+    private Observer<List<QuizHistory.Result>> showResultAddQuizHistory = new Observer<List<QuizHistory.Result>>() {
         @Override
-        public void onChanged(QuizHistory.Result results) {
+        public void onChanged(List<QuizHistory.Result> results) {
             if(results!=null){
+
                 bundle=new Bundle();
                 bundle.putString("levelId", ""+ bundleLevelId);
-                bundle.putString("quizHistoryId", ""+ results.getId());
+                checkAvailable = "false";
+
+                for(int i=0;i<results.size();i++){
+                    if(results.get(i).getStudent().getId() == Integer.parseInt(helper.getUserId()) &&
+                            results.get(i).getFis8_level_id() == bundleLevelId){
+
+                    }
+                }
+                bundle.putString("checkAvailable", String.valueOf(checkAvailable));
+                bundle.putString("quizHistoryId", ""+ results.get((results.size()-1)));
+                bundle.putString("score_level", ""+arrayListLevel.get(positions).getScore_reward());
+                bundle.putString("money_level", ""+arrayListLevel.get(positions).getMoney_reward());
+                bundle.putString("ticket_level", ""+arrayListLevel.get(positions).getTicket_reward());
 
                 Navigation.findNavController(myv).navigate(R.id.action_pilihLevelFragment_to_permainanFragment,bundle);
             }else{
@@ -157,8 +176,8 @@ public class PilihLevelFragment extends Fragment {
             public void onItemClicked(RecyclerView recyclerView, int position, View v) {
 
                 bundleLevelId = adapter_level.getListLevel().get(position).getId();
-
-               // quizHistoryViewModel.init(helper.getAccessToken()); unsend
+                positions = position;
+               quizHistoryViewModel.init(helper.getAccessToken());// unsend
                 quizHistoryViewModel.addQuizHistory(helper.getUserId(), ""+bundleLevelId);
                 quizHistoryViewModel.getResultAddQuizHistory().observe(getActivity(), showResultAddQuizHistory);
             }

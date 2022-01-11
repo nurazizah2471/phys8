@@ -1,12 +1,11 @@
 package com.example.phys8.Repositories;
 
-import android.util.Log;
-
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.phys8.Models.Categories;
 import com.example.phys8.Models.QuizHistory;
+import com.example.phys8.Models.Rank;
+import com.example.phys8.Models.userHistory;
 import com.example.phys8.Retrofit.ApiService;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -25,28 +24,28 @@ public class QuizHistoryRepository {
     private ApiService apiService;
 
     //unsend
-   // private QuizHistoryRepository(String token){
-     //   apiService = ApiService.getInstance(token);
-    //}
+    private QuizHistoryRepository(String token){
+        apiService = ApiService.getInstance(token);
+    }
 
     //unsend
-   // public static QuizHistoryRepository getInstance(String token){
-     //   if (quizHistoryRepository == null){
-       //     quizHistoryRepository = new QuizHistoryRepository(token);
-        //}
-        //return quizHistoryRepository;
-    //}
-
-    //no
-    private QuizHistoryRepository(){
-           apiService = ApiService.getInstance("");
-        }
-        public static QuizHistoryRepository getInstance(){
-           if (quizHistoryRepository == null){
-             quizHistoryRepository = new QuizHistoryRepository();
+    public static QuizHistoryRepository getInstance(String token){
+        if (quizHistoryRepository == null){
+            quizHistoryRepository = new QuizHistoryRepository(token);
         }
         return quizHistoryRepository;
-        }
+    }
+
+    //no
+   // private QuizHistoryRepository(){
+     //      apiService = ApiService.getInstance("");
+      //  }
+        //public static QuizHistoryRepository getInstance(){
+          // if (quizHistoryRepository == null){
+            // quizHistoryRepository = new QuizHistoryRepository();
+        //}
+        //return quizHistoryRepository;
+        //}
 
     public synchronized void resetInstance(){
         if (quizHistoryRepository != null){
@@ -56,18 +55,18 @@ public class QuizHistoryRepository {
         }
     }
 
-    public MutableLiveData<QuizHistory.Result> addQuizHistory(String student_id, String level_id){
-        final MutableLiveData<QuizHistory.Result> listAddHistory = new MutableLiveData<>();
+    public MutableLiveData<List<QuizHistory.Result>> addQuizHistory(String student_id, String level_id){
+        final MutableLiveData<List<QuizHistory.Result>> listAddHistory = new MutableLiveData<>();
 
         apiService.addQuizHistory(student_id, level_id).enqueue(new Callback<QuizHistory>() {
             @Override
             public void onResponse(Call<QuizHistory> call, Response<QuizHistory> response) {
                 if (response.isSuccessful()){
 
-                    listAddHistory.postValue(response.body().getResult().get(0));
+
+                    listAddHistory.postValue(response.body().getResult());
                 }
             }
-
             @Override
             public void onFailure(Call<QuizHistory> call, Throwable t) {
             }
@@ -76,32 +75,31 @@ public class QuizHistoryRepository {
         return listAddHistory;
     }
 
-    public MutableLiveData<List<QuizHistory.Result>> getQuizHistory(String student_id){
-        final MutableLiveData<List<QuizHistory.Result>> listGetHistory = new MutableLiveData<>();
+    public MutableLiveData<List<userHistory.Result>> getQuizHistory(String student_id){
+        final MutableLiveData<List<userHistory.Result>> listGetHistory = new MutableLiveData<>();
 
-        apiService.getQuizHistory(student_id).enqueue(new Callback<QuizHistory>() {
+        apiService.getQuizHistory(student_id).enqueue(new Callback<userHistory>() {
             @Override
-            public void onResponse(Call<QuizHistory> call, Response<QuizHistory> response) {
+            public void onResponse(Call<userHistory> call, Response<userHistory> response) {
                 if (response.isSuccessful()){
 
                     listGetHistory.postValue(response.body().getResult());
                 }
             }
-
             @Override
-            public void onFailure(Call<QuizHistory> call, Throwable t) {
+            public void onFailure(Call<userHistory> call, Throwable t) {
             }
         });
 
         return listGetHistory;
     }
 
-    public MutableLiveData<List<QuizHistory.Result>> getRank(){
-        final MutableLiveData<List<QuizHistory.Result>> listGetRank = new MutableLiveData<>();
+    public MutableLiveData<List<Rank.Result>> getRank(){
+        final MutableLiveData<List<Rank.Result>> listGetRank = new MutableLiveData<>();
 
-        apiService.getRank().enqueue(new Callback<QuizHistory>() {
+        apiService.getRank().enqueue(new Callback<Rank>() {
             @Override
-            public void onResponse(Call<QuizHistory> call, Response<QuizHistory> response) {
+            public void onResponse(Call<Rank> call, Response<Rank> response) {
                 if (response.isSuccessful()){
 
                     listGetRank.postValue(response.body().getResult());
@@ -109,7 +107,7 @@ public class QuizHistoryRepository {
             }
 
             @Override
-            public void onFailure(Call<QuizHistory> call, Throwable t) {
+            public void onFailure(Call<Rank> call, Throwable t) {
             }
         });
 

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/action_logreg"
-    app:startDestination="@id/berandaFragment">
+    app:startDestination="@id/loginFragment">
 
     <fragment
         android:id="@+id/loginFragment"
@@ -36,17 +36,14 @@
         android:label="Beranda"
         tools:layout="@layout/fragment_beranda">
         <action
-            android:id="@+id/action_berandaFragment_to_profileFragment"
-            app:destination="@id/profileFragment" />
-        <action
-            android:id="@+id/action_berandaFragment_to_profileFragment2"
-            app:destination="@id/profileFragment" />
-        <action
             android:id="@+id/action_berandaFragment_to_pilihLevelFragment"
             app:destination="@id/pilihLevelFragment" />
         <action
             android:id="@+id/action_berandaFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_berandaFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
     </fragment>
     <fragment
         android:id="@+id/permainanFragment"
@@ -79,8 +76,14 @@
             android:id="@+id/action_profileFragment_to_historyFragment"
             app:destination="@id/historyFragment" />
         <action
-            android:id="@+id/action_profileFragment_to_berandaFragment"
-            app:destination="@id/berandaFragment" />
+            android:id="@+id/action_profileFragment_to_peringkatFragment"
+            app:destination="@id/peringkatFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/peringkatFragment"
+        android:name="com.example.phys8.Views.Fragments.LeaderboardFragment"
+        android:label="Peringkat"
+        tools:layout="@layout/fragment_leaderboard">
     </fragment>
     <fragment
         android:id="@+id/pilihLevelFragment"

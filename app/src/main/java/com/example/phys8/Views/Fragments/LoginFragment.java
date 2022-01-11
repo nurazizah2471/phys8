@@ -95,6 +95,7 @@ public class LoginFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         helper = SharedPreferenceHelper.getInstance(requireActivity());
+     //   helper.saveUserId("");
 
         if(helper.getUserId()!=""){
             Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_berandaFragment);

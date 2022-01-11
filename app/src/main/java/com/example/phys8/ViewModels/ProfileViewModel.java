@@ -20,13 +20,13 @@ public class ProfileViewModel extends AndroidViewModel {
     public ProfileViewModel(@NonNull Application application) {
         super(application);
         //no
-        profileRepository = ProfileRepository.getInstance();
+       // profileRepository = ProfileRepository.getInstance();
     }
 
     //unsend
-    //public void init(String token){
-      //  profileRepository = ProfileRepository.getInstance(token);
-    //}
+    public void init(String token){
+        profileRepository = ProfileRepository.getInstance(token);
+    }
 
     public LiveData<String> logout(){
         profileRepository.resetInstance();
@@ -38,6 +38,14 @@ public class ProfileViewModel extends AndroidViewModel {
     }
     public LiveData<User.Result> getResultUserWithId(){
         return resultUsers;
+    }
+
+    private MutableLiveData<User.Result> resultUsers2 = new MutableLiveData<>();
+    public void getUserWithId2(String userId){
+        resultUsers2 = profileRepository.getUserWithId(userId);
+    }
+    public LiveData<User.Result> getResultUserWithId2(){
+        return resultUsers2;
     }
 
     @Override

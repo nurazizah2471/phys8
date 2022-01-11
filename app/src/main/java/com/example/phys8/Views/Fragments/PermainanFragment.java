@@ -103,10 +103,11 @@ public class PermainanFragment extends Fragment {
     private View myv;
     private QuizHistoryViewModel quizHistoryViewModel;
 
-    private int score, positionChoosenPilgan, questionSize;
+    private int score, positionChoosenPilgan, questionSize, score_level, money_level, ticket_level;
     private boolean answered;
     private rvAdapter_ikonBenarSalahKuis adapter_ikonBenarSalahKuis;
     private String levelId, quizHistoryId;
+    private String checkAvailable;
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -117,12 +118,16 @@ public class PermainanFragment extends Fragment {
 
         levelId=getArguments().getString("levelId");
         quizHistoryId=getArguments().getString("quizHistoryId");
+        checkAvailable = getArguments().getString("checkAvailable");
+       score_level = Integer.parseInt(getArguments().getString("score_level"));
+        money_level = Integer.parseInt(getArguments().getString("money_level"));
+        ticket_level = Integer.parseInt(getArguments().getString("ticket_level"));
 
 
         addItemClickSupport();
         getQuestionWithHistoryId(quizHistoryId);
 
-        //permainanViewModel.init(helper.getAccessToken()); //unsend
+        permainanViewModel.init(helper.getAccessToken()); //unsend
         permainanViewModel.getQuestionWithLevelId(levelId);
         permainanViewModel.getResultQuestionWithLevelId().observe(getActivity(), showQuestion);
     }
@@ -138,7 +143,7 @@ public class PermainanFragment extends Fragment {
             public void onItemClicked(RecyclerView recyclerView, int position, View v) {
 
                 positionChoosenPilgan = position;
-                //quizHistoryViewModel.init(helper.getAccessToken()); unsend
+                quizHistoryViewModel.init(helper.getAccessToken());// unsend
                 quizHistoryViewModel.addUserAnswer(quizHistoryId, String.valueOf(questionList.get(questionCounter).getId()),
                               questionList.get(questionCounter).getAnswer_option().get(position).getPivot().getOption()).observe(requireActivity(), s -> {
                     if (!s.isEmpty()){
@@ -156,6 +161,12 @@ public class PermainanFragment extends Fragment {
 
         if(questionList.get(questionCounter).getAnswer_option().get(position).getPivot().getOption().equalsIgnoreCase(questionList.get(questionCounter).getCorrect_answer_option())){
             score++;
+
+
+            if(checkAvailable.equalsIgnoreCase("false")){
+                //update skor profile
+            }
+
             Toast.makeText(getActivity(),"Jawaban Benar! Akumulasi skor: "+score, Toast.LENGTH_SHORT).show();
         }else{
             Toast.makeText(getActivity(),"Jawaban Salah! Jawaban Benar: "+questionList.get(questionCounter).getCorrect_answer_option()+" Akumulasi skor: "+score, Toast.LENGTH_SHORT).show();
@@ -259,6 +270,7 @@ public class PermainanFragment extends Fragment {
         rv_PilihanGanda_FragmentPermainan = view.findViewById(R.id.rv_PilihanGanda_FragmentPermainan);
         soal_FragmentPermainan = view.findViewById(R.id.soal_FragmentPermainan);
 
+        helper = SharedPreferenceHelper.getInstance(requireActivity());
         permainanViewModel=new ViewModelProvider(getActivity()).get(PermainanViewModel.class);
         quizHistoryViewModel=new ViewModelProvider(getActivity()).get(QuizHistoryViewModel.class);
     }
